@@ -27,4 +27,8 @@ public class Book {
     private String publication_date;
 
     private String summary;
+
+    private int quantity;
+
+    private int price;
 }
