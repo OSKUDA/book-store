@@ -1,6 +1,7 @@
 package np.com.oskarshrestha.bookstorebackend.controller;
 
 import np.com.oskarshrestha.bookstorebackend.model.BookResponse;
+import np.com.oskarshrestha.bookstorebackend.model.BooksResponse;
 import np.com.oskarshrestha.bookstorebackend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,19 @@ public class BookController {
         if(response.getBook() != null){
             return ResponseEntity.ok(response);
         }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/books")
+    public ResponseEntity<BooksResponse> getBooks(
+            @RequestParam("page") int page,
+            @RequestParam("length") int length
+    ){
+        BooksResponse response = bookService.fetchBooks(page, length);
+        if(response.getBookList() != null){
+            return ResponseEntity.ok(response);
+        }else {
             return ResponseEntity.notFound().build();
         }
     }
