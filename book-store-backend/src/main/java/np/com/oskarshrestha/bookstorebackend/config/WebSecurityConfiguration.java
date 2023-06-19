@@ -12,6 +12,8 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfiguration {
     private static final String[] WHITE_LIST_URLS = {
             "/api/v1/hello",
+            "/api/v1/book",
+            "/api/v1/books",
     };
 
 
