@@ -42,7 +42,6 @@ public class User implements UserDetails {
         map.put("id", getId());
         map.put("firstName", getFirstName());
         map.put("email", getEmail());
-        map.put("password", getPassword());
         map.put("enabled", isEnabled());
         map.put("role", getRole());
         return map;

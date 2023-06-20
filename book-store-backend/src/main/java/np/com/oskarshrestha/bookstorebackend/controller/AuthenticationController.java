@@ -1,5 +1,7 @@
 package np.com.oskarshrestha.bookstorebackend.controller;
 
+import np.com.oskarshrestha.bookstorebackend.model.UserAuthenticationRequest;
+import np.com.oskarshrestha.bookstorebackend.model.UserAuthenticationResponse;
 import np.com.oskarshrestha.bookstorebackend.model.UserRegisterRequest;
 import np.com.oskarshrestha.bookstorebackend.model.UserRegisterResponse;
 import np.com.oskarshrestha.bookstorebackend.service.UserService;
@@ -26,6 +28,18 @@ public class AuthenticationController {
             return ResponseEntity.ok(response);
         }else{
             return ResponseEntity.status(409).body(response);
+        }
+    }
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<UserAuthenticationResponse> authenticate(
+            @RequestBody UserAuthenticationRequest userAuthenticationRequest
+    ){
+        UserAuthenticationResponse response = userService.authenticate(userAuthenticationRequest);
+        if(response.getToken() == null){
+            return ResponseEntity.status(401).body(response);
+        }else{
+            return ResponseEntity.ok(response);
         }
     }
 }

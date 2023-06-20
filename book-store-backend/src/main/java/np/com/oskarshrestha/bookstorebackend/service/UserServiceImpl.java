@@ -1,11 +1,15 @@
 package np.com.oskarshrestha.bookstorebackend.service;
 
 import np.com.oskarshrestha.bookstorebackend.entity.User;
+import np.com.oskarshrestha.bookstorebackend.model.UserAuthenticationRequest;
+import np.com.oskarshrestha.bookstorebackend.model.UserAuthenticationResponse;
 import np.com.oskarshrestha.bookstorebackend.model.UserRegisterRequest;
 import np.com.oskarshrestha.bookstorebackend.model.UserRegisterResponse;
 import np.com.oskarshrestha.bookstorebackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +21,9 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JwtService jwtService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -46,6 +53,35 @@ public class UserServiceImpl implements UserService{
                 .existingUser(false)
                 .registrationSuccess(true)
                 .build();
+    }
+
+    @Override
+    public UserAuthenticationResponse authenticate(UserAuthenticationRequest userAuthenticationRequest) {
+        try{
+            User user = userRepository
+                    .findByEmail(userAuthenticationRequest.getEmail())
+                    .orElseThrow(
+                            ()-> new UsernameNotFoundException("Email not found: "+userAuthenticationRequest.getEmail())
+                    );
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            userAuthenticationRequest.getEmail(),
+                            userAuthenticationRequest.getPassword()
+                    )
+            );
+            String jwtToken = jwtService.generateToken(user.toMap(), user);
+            return UserAuthenticationResponse
+                    .builder()
+                    .token(jwtToken)
+                    .errorMessage(null)
+                    .build();
+        }catch (Exception e){
+            return UserAuthenticationResponse
+                    .builder()
+                    .token(null)
+                    .errorMessage(e.getMessage())
+                    .build();
+        }
     }
 
 }

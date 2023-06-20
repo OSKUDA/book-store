@@ -17,7 +17,8 @@ public class WebSecurityConfiguration {
             "/api/v1/hello",
             "/api/v1/book",
             "/api/v1/books",
-            "/api/v1/register"
+            "/api/v1/register",
+            "/api/v1/authenticate"
     };
 
     @Autowired
