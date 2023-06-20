@@ -5,6 +5,7 @@ import np.com.oskarshrestha.bookstorebackend.model.*;
 import np.com.oskarshrestha.bookstorebackend.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -91,6 +92,32 @@ public class BookServiceImpl implements BookService {
                     .build();
         }else{
             return DeleteBookResponse
+                    .builder()
+                    .status(false)
+                    .message(id+" doesn't exist")
+                    .build();
+        }
+    }
+
+    @Override
+    public PutBookResponse updateBookById(long id, PutBookRequest putBookRequest) {
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        if(optionalBook.isPresent()){
+            Book book = optionalBook.get();
+            if (putBookRequest.getPrice() >= 0) {
+                book.setPrice(putBookRequest.getPrice());
+            }
+            if (putBookRequest.getQuantity() >= 0) {
+                book.setQuantity(putBookRequest.getQuantity());
+            }
+            bookRepository.save(book);
+            return PutBookResponse
+                    .builder()
+                    .status(true)
+                    .message("success")
+                    .build();
+        }else{
+            return PutBookResponse
                     .builder()
                     .status(false)
                     .message(id+" doesn't exist")

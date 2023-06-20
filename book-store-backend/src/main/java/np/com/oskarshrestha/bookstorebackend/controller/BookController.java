@@ -50,6 +50,19 @@ public class BookController {
         }
     }
 
+    @PutMapping("/book")
+    public ResponseEntity<PutBookResponse> updateBook(
+            @RequestParam("id") long id,
+            @RequestBody PutBookRequest putBookRequest
+    ){
+        PutBookResponse response = bookService.updateBookById(id, putBookRequest);
+        if(response.isStatus()){
+            return ResponseEntity.ok(response);
+        }else{
+            return ResponseEntity.status(404).body(response);
+        }
+    }
+
     @GetMapping("/books")
     public ResponseEntity<BooksResponse> getBooks(
             @RequestParam("page") int page,
