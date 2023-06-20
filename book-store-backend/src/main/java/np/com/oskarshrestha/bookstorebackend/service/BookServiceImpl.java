@@ -1,9 +1,7 @@
 package np.com.oskarshrestha.bookstorebackend.service;
 
 import np.com.oskarshrestha.bookstorebackend.entity.Book;
-import np.com.oskarshrestha.bookstorebackend.model.BookResponse;
-import np.com.oskarshrestha.bookstorebackend.model.BooksResponse;
-import np.com.oskarshrestha.bookstorebackend.model.MinBook;
+import np.com.oskarshrestha.bookstorebackend.model.*;
 import np.com.oskarshrestha.bookstorebackend.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -56,5 +54,29 @@ public class BookServiceImpl implements BookService{
                     .page(page)
                     .build();
         }
+    }
+
+    @Override
+    public AddBookResponse addBook(AddBookRequest addBookRequest) {
+        if(bookRepository.existsByTitleAndAuthorAndPublicationDate(
+                addBookRequest.getTitle(),
+                addBookRequest.getAuthor(),
+                addBookRequest.getPublicationDate()
+        )){
+            return AddBookResponse.builder().status(false).build();
+        }else{
+            bookRepository.save(
+                    Book
+                            .builder()
+                            .title(addBookRequest.getTitle())
+                            .author(addBookRequest.getAuthor())
+                            .publicationDate(addBookRequest.getPublicationDate())
+                            .summary(addBookRequest.getSummary())
+                            .quantity(addBookRequest.getQuantity())
+                            .price(addBookRequest.getPrice())
+                            .build()
+            );
+        }
+        return AddBookResponse.builder().status(true).build();
     }
 }
