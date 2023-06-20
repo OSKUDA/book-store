@@ -8,22 +8,13 @@ import np.com.oskarshrestha.bookstorebackend.entity.Book;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class MinBook {
-    private long id;
-
+@NoArgsConstructor
+public class AddBookRequest {
     private String title;
-
     private String author;
-
     private int publicationDate;
-
+    private String summary;
     private int quantity;
-
     private int price;
-
-    public static MinBook fromBook(Book book) {
-        return new MinBook(book.getId(), book.getTitle(), book.getAuthor(), book.getPublicationDate(), book.getQuantity(), book.getPrice());
-    }
 }

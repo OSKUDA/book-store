@@ -1,9 +1,6 @@
 package np.com.oskarshrestha.bookstorebackend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +21,8 @@ public class Book {
 
     private String author;
 
-    private String publication_date;
+    @Column(name = "publication_date")
+    private int publicationDate;
 
     private String summary;
 

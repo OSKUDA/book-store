@@ -1,14 +1,11 @@
 package np.com.oskarshrestha.bookstorebackend.controller;
 
-import np.com.oskarshrestha.bookstorebackend.model.BookResponse;
-import np.com.oskarshrestha.bookstorebackend.model.BooksResponse;
+import np.com.oskarshrestha.bookstorebackend.model.*;
 import np.com.oskarshrestha.bookstorebackend.service.BookService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -29,6 +26,43 @@ public class BookController {
         }
     }
 
+    @PostMapping("/book")
+    public ResponseEntity<AddBookResponse> postBook(
+            @RequestBody AddBookRequest addBookRequest
+    ){
+        AddBookResponse response = bookService.addBook(addBookRequest);
+        if(response.isStatus()){
+            return ResponseEntity.ok(response);
+        }else{
+            return ResponseEntity.status(409).body(response);
+        }
+    }
+
+    @DeleteMapping("/book")
+    public ResponseEntity<DeleteBookResponse> deleteBook(
+            @RequestParam("id") long id
+    ){
+        DeleteBookResponse response = bookService.deleteBookById(id);
+        if(response.isStatus()){
+            return ResponseEntity.ok(response);
+        }else{
+            return ResponseEntity.status(404).body(response);
+        }
+    }
+
+    @PutMapping("/book")
+    public ResponseEntity<PutBookResponse> updateBook(
+            @RequestParam("id") long id,
+            @RequestBody PutBookRequest putBookRequest
+    ){
+        PutBookResponse response = bookService.updateBookById(id, putBookRequest);
+        if(response.isStatus()){
+            return ResponseEntity.ok(response);
+        }else{
+            return ResponseEntity.status(404).body(response);
+        }
+    }
+
     @GetMapping("/books")
     public ResponseEntity<BooksResponse> getBooks(
             @RequestParam("page") int page,
@@ -41,4 +75,6 @@ public class BookController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
 }
