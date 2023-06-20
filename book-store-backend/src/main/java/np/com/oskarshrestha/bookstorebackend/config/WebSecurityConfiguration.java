@@ -3,6 +3,7 @@ package np.com.oskarshrestha.bookstorebackend.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,8 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfiguration {
     private static final String[] WHITE_LIST_URLS = {
             "/api/v1/hello",
-            "/api/v1/book",
-            "/api/v1/books",
             "/api/v1/register",
             "/api/v1/authenticate"
     };
@@ -37,6 +36,8 @@ public class WebSecurityConfiguration {
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers(WHITE_LIST_URLS)
+                .permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/book","/api/v1/books")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

@@ -1,10 +1,8 @@
 package np.com.oskarshrestha.bookstorebackend.controller;
 
-import np.com.oskarshrestha.bookstorebackend.model.AddBookRequest;
-import np.com.oskarshrestha.bookstorebackend.model.AddBookResponse;
-import np.com.oskarshrestha.bookstorebackend.model.BookResponse;
-import np.com.oskarshrestha.bookstorebackend.model.BooksResponse;
+import np.com.oskarshrestha.bookstorebackend.model.*;
 import np.com.oskarshrestha.bookstorebackend.service.BookService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +35,18 @@ public class BookController {
             return ResponseEntity.ok(response);
         }else{
             return ResponseEntity.status(409).body(response);
+        }
+    }
+
+    @DeleteMapping("/book")
+    public ResponseEntity<DeleteBookResponse> deleteBook(
+            @RequestParam("id") long id
+    ){
+        DeleteBookResponse response = bookService.deleteBookById(id);
+        if(response.isStatus()){
+            return ResponseEntity.ok(response);
+        }else{
+            return ResponseEntity.status(404).body(response);
         }
     }
 

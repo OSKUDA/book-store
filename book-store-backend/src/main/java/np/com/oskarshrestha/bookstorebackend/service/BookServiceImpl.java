@@ -11,19 +11,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
     @Autowired
     private BookRepository bookRepository;
 
     @Override
-    public BookResponse fetchBookById(Long id){
+    public BookResponse fetchBookById(Long id) {
         Optional<Book> book = bookRepository.findById(id);
-        if(book.isPresent()){
+        if (book.isPresent()) {
             return BookResponse
                     .builder()
                     .book(book.get())
                     .build();
-        }else{
+        } else {
             return BookResponse
                     .builder()
                     .book(null)
@@ -39,14 +39,14 @@ public class BookServiceImpl implements BookService{
                 .stream()
                 .map(MinBook::fromBook)
                 .toList();
-        if(minBooks.isEmpty()){
+        if (minBooks.isEmpty()) {
             return BooksResponse
                     .builder()
                     .bookList(null)
                     .size(0)
                     .page(0)
                     .build();
-        }else{
+        } else {
             return BooksResponse
                     .builder()
                     .bookList(minBooks)
@@ -58,13 +58,13 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public AddBookResponse addBook(AddBookRequest addBookRequest) {
-        if(bookRepository.existsByTitleAndAuthorAndPublicationDate(
+        if (bookRepository.existsByTitleAndAuthorAndPublicationDate(
                 addBookRequest.getTitle(),
                 addBookRequest.getAuthor(),
                 addBookRequest.getPublicationDate()
-        )){
+        )) {
             return AddBookResponse.builder().status(false).build();
-        }else{
+        } else {
             bookRepository.save(
                     Book
                             .builder()
@@ -78,5 +78,23 @@ public class BookServiceImpl implements BookService{
             );
         }
         return AddBookResponse.builder().status(true).build();
+    }
+
+    @Override
+    public DeleteBookResponse deleteBookById(Long id) {
+        if (bookRepository.existsById(id)) {
+            bookRepository.deleteById(id);
+            return DeleteBookResponse
+                    .builder()
+                    .status(true)
+                    .message("success")
+                    .build();
+        }else{
+            return DeleteBookResponse
+                    .builder()
+                    .status(false)
+                    .message(id+" doesn't exist")
+                    .build();
+        }
     }
 }
