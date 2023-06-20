@@ -10,4 +10,9 @@ public class TestController {
     public String hello(){
         return "Hello";
     }
+
+    @GetMapping("/api/v1/secure")
+    public String secure(){
+        return "This is secure data";
+    }
 }
