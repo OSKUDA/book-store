@@ -103,4 +103,38 @@ public class OrderServiceImpl implements OrderService{
                     .build();
         }
     }
+
+    @Override
+    public OrderResponse fetchOrder(long id) {
+        Optional<Orders> orderOptional = orderRepository.findById(id);
+        if(orderOptional.isPresent()){
+            Orders order = orderOptional.get();
+
+            MinOrder minOrder = new MinOrder();
+            minOrder.setId(order.getId());
+            minOrder.setMinUser(MinUser.fromUser(order.getUser()));
+
+            List<MinBook> minBookList = new ArrayList<>();
+            order.getBooks().forEach(
+                    book ->{
+                        minBookList.add(MinBook.fromBook(book));
+                    }
+            );
+            minOrder.setMinBookList(minBookList);
+
+            return OrderResponse
+                    .builder()
+                    .status(true)
+                    .message("success")
+                    .minOrder(minOrder)
+                    .build();
+        }else{
+            return OrderResponse
+                    .builder()
+                    .status(false)
+                    .message("order id not found")
+                    .minOrder(null)
+                    .build();
+        }
+    }
 }
