@@ -3,6 +3,7 @@ package np.com.oskarshrestha.bookstorebackend.controller;
 import np.com.oskarshrestha.bookstorebackend.entity.Orders;
 import np.com.oskarshrestha.bookstorebackend.model.AddOrderRequest;
 import np.com.oskarshrestha.bookstorebackend.model.AddOrderResponse;
+import np.com.oskarshrestha.bookstorebackend.model.OrderResponse;
 import np.com.oskarshrestha.bookstorebackend.model.OrdersResponse;
 import np.com.oskarshrestha.bookstorebackend.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,18 @@ public class OrderController {
             @RequestBody AddOrderRequest addOrderRequest
     ){
         AddOrderResponse response = orderService.addOrder(addOrderRequest);
+        if(response.isStatus()){
+            return ResponseEntity.ok(response);
+        }else{
+            return ResponseEntity.status(400).body(response);
+        }
+    }
+
+    @GetMapping("/order")
+    public ResponseEntity<OrderResponse> fetchOrder(
+            @RequestParam("id") long id
+    ){
+        OrderResponse response = orderService.fetchOrder(id);
         if(response.isStatus()){
             return ResponseEntity.ok(response);
         }else{
