@@ -1,0 +1,118 @@
+body {
+  background-color: #81a69b;
+  background-image: url(http://pets-images.dev-apis.com/pets/wallpaperB.jpg);
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.app-title {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 32px;
+  color: #3cb371;
+  text-align: center;
+  margin-top: 50px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-decoration: underline;
+}
+.form-container {
+  width: 400px;
+  margin: 10% auto;
+}
+
+.form-container form {
+  border-radius: 6px;
+  background: #faeff0;
+  box-shadow: 0px 0px 12px #aaa, -0px -0px 12px #fff;
+  width: 360px;
+  margin: 0px 25px 0px 0px;
+  padding: 35px 15px 15px 15px;
+  float: left;
+}
+
+.form-container label {
+  /* display: block; */
+  width: 60px;
+}
+
+.form-container button {
+  font-size: 20px;
+}
+
+.form-container input {
+  margin-bottom: 30px;
+  font-size: 18px;
+  height: 30px;
+  width: 325px;
+}
+
+.form-container button:hover {
+  background-color: #122622;
+  color: white;
+}
+
+.form-container button:active {
+  background-color: #5f1d22;
+  color: white;
+}
+
+.form-container button:focus {
+  border: 1px solid cornflowerblue;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.error-message {
+  font-size: 12px;
+  color: red;
+}
+
+.button button {
+  width: 90px;
+}
+
+.loading-pane {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 15px;
+}
+.loader {
+  font-size: 120px;
+}
+
+.server-message {
+  font-size: 42px;
+}
+
+/* CSS styles for the navigation bar */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-title {
+  color: white;
+  margin-right: auto;
+  padding: 14px 16px;
+}
+
+.navbar a {
+  color: white;
+  text-align: center;
+  padding: 14px 28px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
