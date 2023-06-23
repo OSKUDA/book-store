@@ -3,18 +3,28 @@ import NavBar from "./NavBar";
 import BookGrid from "./BookGrid";
 import getBooks from "../services/books/getBooks";
 import { useState, useEffect } from "react";
-const Books = () => {
+const BooksPage = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   const [minBookList, setMinBookList] = useState([]);
   const [status, setStatus] = useState(false);
+  const [page, setPage] = useState(0);
   useEffect(() => {
     if (token !== null) {
-      getBooks({ query: [token, 0, 10] }).then((response) => {
+      getBooks({ query: [token, page, 25] }).then((response) => {
         setMinBookList(response.data.bookList);
         setStatus(true);
       });
     }
-  }, [token]);
+  }, [token, page]);
+  const handlePreviousPage = () => {
+    if (page > 0) {
+      setPage((prevPage) => prevPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
   if (token === null) {
     return (
       <div className="form-container vertical-center">
@@ -34,9 +44,20 @@ const Books = () => {
     return (
       <div>
         <NavBar />
-        <h1 className="title-center">Books</h1>
         {status ? (
-          <BookGrid minBookList={minBookList} />
+          <div>
+            <h1 className="title-center">Books</h1>
+            <div className="button-container">
+              <button className="previous-button" onClick={handlePreviousPage}>
+                Previous
+              </button>
+              <span className="page-number">{page}</span>
+              <button className="next-button" onClick={handleNextPage}>
+                Next
+              </button>
+            </div>
+            <BookGrid minBookList={minBookList} />
+          </div>
         ) : (
           <p>Loading books...</p>
         )}
@@ -44,4 +65,4 @@ const Books = () => {
     );
   }
 };
-export default Books;
+export default BooksPage;

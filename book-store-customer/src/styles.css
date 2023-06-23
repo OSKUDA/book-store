@@ -200,3 +200,33 @@ body {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
+
+/* CSS styles for previous and next button on book page */
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 98%;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+
+.previous-button,
+.next-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  color: black;
+  border-color: #9acd32;
+}
+
+.next-button {
+  margin-left: 10px;
+}
+
+.page-number {
+  font-size: 28px;
+}
