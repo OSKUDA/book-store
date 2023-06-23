@@ -230,3 +230,93 @@ body {
 .page-number {
   font-size: 28px;
 }
+
+/* CSS styles for book details */
+.book-details-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.book-details {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.book-details-field {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.book-details-label {
+  font-weight: bold;
+  width: 120px;
+}
+
+.book-details-span {
+  margin-left: 10px;
+  text-align: justify;
+}
+
+.book-details-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-details-title-center {
+  margin: 0;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.add-to-cart-button {
+  padding: 10px 20px;
+  background-color: #ff5e3a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.add-to-cart-button:hover {
+  background-color: #ff785c;
+}
+
+.add-to-cart-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #ff5e3a;
+}
+
+/* CSS styles for cart page */
+.cart-page-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.confirm-order-button {
+  padding: 10px 20px;
+  background-color: #ff5e3a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.confirm-order-button:hover {
+  background-color: #ff785c;
+}
+
+.confirm-order-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #ff5e3a;
+}
