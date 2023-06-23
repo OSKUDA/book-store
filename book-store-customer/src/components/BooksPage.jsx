@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
-
-const Dashboard = () => {
+import BookGrid from "./BookGrid";
+const Books = () => {
   const token = JSON.parse(localStorage.getItem("token"));
+
   if (token === null) {
     return (
       <div className="form-container vertical-center">
@@ -19,11 +20,24 @@ const Dashboard = () => {
       </div>
     );
   } else {
+    const minBookList = [
+      {
+        id: 1,
+        title: "Book 1",
+        author: "Author 1",
+        publicationDate: 1990,
+        quantity: 20,
+        price: 2000,
+      },
+      // Add more books here...
+    ];
     return (
       <div>
         <NavBar />
+        <h1 className="title-center">Books</h1>
+        <BookGrid minBookList={minBookList} />
       </div>
     );
   }
 };
-export default Dashboard;
+export default Books;

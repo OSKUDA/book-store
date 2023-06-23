@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import validateEmailPassword from "../utils/validateEmailPassword";
-import postAuthenticate from "../services/postAuthenticate";
+import postAuthenticate from "../services/auth/postAuthenticate";
 const SignIn = () => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);

@@ -5,6 +5,7 @@ import Register from "./components/Register";
 // import ForgotPassword from "./components/ForgotPassword";
 // import VerifyEmail from "./components/VerifyEmail";
 import Dashboard from "./components/Dashboard";
+import Books from "./components/BooksPage";
 // import ChangePassword from "./components/ChangePassword";
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
         {/* <Route path="/forgot-password" element={<ForgotPassword />} /> */}
         {/* <Route path="/verify-email" element={<VerifyEmail />} /> */}
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/books" element={<Books />} />
         {/* <Route path="/change-password" element={<ChangePassword />} /> */}
       </Routes>
     </BrowserRouter>
