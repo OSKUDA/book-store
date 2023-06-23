@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import NavBar from "./NavBar";
 
 const Dashboard = () => {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -20,20 +21,7 @@ const Dashboard = () => {
   } else {
     return (
       <div>
-        <div className="navbar">
-          <div className="navbar-title">BookStore.com</div>
-          <Link to={"/dashboard"}>Books</Link>
-          <Link to={"/dashboard"}>Orders</Link>
-          <Link to={"/dashboard"}>Profile</Link>
-          <Link
-            to={"/"}
-            onClick={() => {
-              localStorage.removeItem("token");
-            }}
-          >
-            Logout
-          </Link>
-        </div>
+        <NavBar />
       </div>
     );
   }

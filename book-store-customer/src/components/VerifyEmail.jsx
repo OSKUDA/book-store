@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import validateEmailVerificationUrl from "../utils/validateEmailVerificationUrl";
-import getVerifyEmail from "../services/getVerifyEmail";
+import getVerifyEmail from "../services/auth/getVerifyEmail";
 const VerifyEmail = () => {
   const [urlError, setUrlError] = useState(false);
   const [serverError, setServerError] = useState(false);

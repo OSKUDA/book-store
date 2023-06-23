@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import validateEmailPassword from "../utils/validateEmailPassword";
-import getForgetPassword from "../services/getForgetPassword";
+import getForgetPassword from "../services/auth/getForgetPassword";
 import validateResetPasswordUrl from "../utils/validateResetPasswordUrl";
-import postResetPassword from "../services/postResetPassword";
+import postResetPassword from "../services/auth/postResetPassword";
 const ForgotPassword = () => {
   const [emailError, setEmailError] = useState(false);
   const [urlError, setUrlError] = useState(false);
