@@ -1,9 +1,20 @@
 import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 import BookGrid from "./BookGrid";
+import getBooks from "../services/books/getBooks";
+import { useState, useEffect } from "react";
 const Books = () => {
   const token = JSON.parse(localStorage.getItem("token"));
-
+  const [minBookList, setMinBookList] = useState([]);
+  const [status, setStatus] = useState(false);
+  useEffect(() => {
+    if (token !== null) {
+      getBooks({ query: [token, 0, 10] }).then((response) => {
+        setMinBookList(response.data.bookList);
+        setStatus(true);
+      });
+    }
+  }, [token]);
   if (token === null) {
     return (
       <div className="form-container vertical-center">
@@ -20,22 +31,15 @@ const Books = () => {
       </div>
     );
   } else {
-    const minBookList = [
-      {
-        id: 1,
-        title: "Book 1",
-        author: "Author 1",
-        publicationDate: 1990,
-        quantity: 20,
-        price: 2000,
-      },
-      // Add more books here...
-    ];
     return (
       <div>
         <NavBar />
         <h1 className="title-center">Books</h1>
-        <BookGrid minBookList={minBookList} />
+        {status ? (
+          <BookGrid minBookList={minBookList} />
+        ) : (
+          <p>Loading books...</p>
+        )}
       </div>
     );
   }
