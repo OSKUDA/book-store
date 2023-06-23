@@ -10,8 +10,14 @@ export const CartProvider = ({ children }) => {
   );
 
   const addToCart = (bookId) => {
-    setCartItems((prevCartItems) => [...prevCartItems, bookId]);
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    setCartItems((prevCartItems) => {
+      if (!prevCartItems.includes(bookId)) {
+        const updatedCartItems = [...prevCartItems, bookId];
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+        return updatedCartItems;
+      }
+      return prevCartItems;
+    });
   };
 
   const removeFromCart = (bookId) => {

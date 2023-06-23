@@ -61,7 +61,7 @@ const CartPage = () => {
             <BookGrid minBookList={minBookList} />
           </div>
         ) : (
-          <h2>Oops! Your cart looks empty.</h2>
+          <h2>Failed</h2>
         )}
       </div>
     );
