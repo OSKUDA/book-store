@@ -6,7 +6,7 @@ import getBook from "../services/books/getBook";
 import { CartContext } from "../contexts/CartContext";
 const BookDetailsPage = () => {
   const { bookId } = useParams();
-  const { cartItems, addToCart } = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
   const [book, setBook] = useState();
   const [status, setStatus] = useState(false);
   const token = JSON.parse(localStorage.getItem("token"));
@@ -22,7 +22,6 @@ const BookDetailsPage = () => {
   }, [token, bookId]);
 
   const handleAddToCart = (bookId) => {
-    localStorage.setItem("cartItems", JSON.stringify([...cartItems, bookId]));
     addToCart(bookId);
   };
   if (token === null) {

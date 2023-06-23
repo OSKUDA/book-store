@@ -11,6 +11,7 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (bookId) => {
     setCartItems((prevCartItems) => {
+      console.log(prevCartItems);
       if (!prevCartItems.includes(bookId)) {
         const updatedCartItems = [...prevCartItems, bookId];
         localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
@@ -27,6 +28,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const clearCart = () => {
+    localStorage.removeItem("cartItems");
     setCartItems([]);
   };
 
