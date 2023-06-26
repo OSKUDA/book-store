@@ -4,11 +4,16 @@ import { CartContext } from "../contexts/CartContext";
 import { useContext, useEffect, useState } from "react";
 import getBook from "../services/books/getBook";
 import BookGrid from "./BookGrid";
+import postAddOrder from "../services/orders/postAddOrder";
+import validateEmailPassword from "../utils/validateEmailPassword";
 const CartPage = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   const { cartItems, clearCart } = useContext(CartContext);
   const [minBookList, setMinBookList] = useState([]);
   const [status, setStatus] = useState(false);
+  const [email, setEmail] = useState("");
+  const [deliveryAddress, setDeliveryAddress] = useState("");
+  const [orderPostSuccess, setOrderPostSuccess] = useState(false);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -26,6 +31,25 @@ const CartPage = () => {
     setStatus(true);
   }, [token, cartItems]);
 
+  const handleAddOrder = (cartItems) => {
+    postAddOrder({
+      query: [token, email, cartItems, deliveryAddress],
+    })
+      .then(() => {
+        setOrderPostSuccess(true);
+      })
+      .catch(() => {
+        setOrderPostSuccess(false);
+      });
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleDeliveryAddressChange = (event) => {
+    setDeliveryAddress(event.target.value);
+  };
   if (token === null) {
     return (
       <div className="form-container vertical-center">
@@ -49,14 +73,53 @@ const CartPage = () => {
           <div>
             <div className="cart-page-button-container">
               <h1 className="title-center">Cart</h1>
+              <div className="cart-page-label-container">
+                <label htmlFor="email" className="cart-page-label">
+                  Order email:
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  className="cart-page-input"
+                  value={email}
+                  onChange={handleEmailChange}
+                />
+              </div>
+              <div className="cart-page-label-container">
+                <label htmlFor="deliveryAddress" className="cart-page-label">
+                  Delivery Address:
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  className="cart-page-input"
+                  value={deliveryAddress}
+                  onChange={handleDeliveryAddressChange}
+                />
+              </div>
               <button
                 className="confirm-order-button"
                 onClick={() => {
-                  clearCart();
+                  if (
+                    validateEmailPassword(email) &&
+                    deliveryAddress.trim() !== ""
+                  ) {
+                    handleAddOrder(cartItems);
+                    clearCart();
+                  }
                 }}
               >
                 Confirm Order ✔️
               </button>
+              <br />
+              <br />
+              {orderPostSuccess ? (
+                <p className="cart-page-order-success-message">
+                  Order placed successfully 🎉
+                </p>
+              ) : (
+                <br />
+              )}
             </div>
             <BookGrid minBookList={minBookList} />
           </div>
