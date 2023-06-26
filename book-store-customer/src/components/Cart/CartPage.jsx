@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import NavBar from "./NavBar";
-import { CartContext } from "../contexts/CartContext";
+import NavBar from "../NavBar";
+import { CartContext } from "../../contexts/CartContext";
 import { useContext, useEffect, useState } from "react";
-import getBook from "../services/books/getBook";
-import BookGrid from "./BookGrid";
-import postAddOrder from "../services/orders/postAddOrder";
-import validateEmailPassword from "../utils/validateEmailPassword";
+import getBook from "../../services/books/getBook";
+import BookGrid from "../Book/BookGrid";
+import postAddOrder from "../../services/orders/postAddOrder";
+import validateEmailPassword from "../../utils/validateEmailPassword";
 const CartPage = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   const { cartItems, clearCart } = useContext(CartContext);
