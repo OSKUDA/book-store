@@ -1,9 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import NavBar from "./NavBar";
+import NavBar from "../NavBar";
 import BookDetailsCard from "./BookDetailsCard";
-import getBook from "../services/books/getBook";
-import { CartContext } from "../contexts/CartContext";
+import getBook from "../../services/books/getBook";
+import { CartContext } from "../../contexts/CartContext";
 const BookDetailsPage = () => {
   const { bookId } = useParams();
   const { addToCart } = useContext(CartContext);

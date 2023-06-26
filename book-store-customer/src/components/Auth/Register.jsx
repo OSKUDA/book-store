@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import validateEmailPassword from "../utils/validateEmailPassword";
-import validateFirstAndLastName from "../utils/validateFirstAndLastName";
-import postRegisterUser from "../services/auth/postRegisterUser";
+import validateEmailPassword from "../../utils/validateEmailPassword";
+import validateFirstAndLastName from "../../utils/validateFirstAndLastName";
+import postRegisterUser from "../../services/auth/postRegisterUser";
 const Register = () => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);

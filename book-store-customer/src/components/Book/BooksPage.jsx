@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import NavBar from "./NavBar";
+import NavBar from "../NavBar";
 import BookGrid from "./BookGrid";
-import getBooks from "../services/books/getBooks";
+import getBooks from "../../services/books/getBooks";
 import { useState, useEffect } from "react";
 const BooksPage = () => {
   const token = JSON.parse(localStorage.getItem("token"));
