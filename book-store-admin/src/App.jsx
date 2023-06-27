@@ -7,6 +7,7 @@ import Dashboard from "./components/Dashboard";
 import ErrorBoundary from "./components/ErrorBoundry";
 import Books from "./components/Book/BooksPage";
 import BookDetails from "./components/Book/BookDetailsPage";
+import Orders from "./components/Order/OrderPage";
 const App = () => {
   return (
     <ErrorBoundary>
@@ -22,6 +23,7 @@ const App = () => {
               path="/dashboard/bookDetails/:bookId"
               element={<BookDetails />}
             />
+            <Route path="/dashboard/orders" element={<Orders />} />
           </Routes>
         </UserDetailProvider>
       </BrowserRouter>
