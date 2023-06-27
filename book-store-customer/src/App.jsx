@@ -11,6 +11,7 @@ import { CartProvider } from "./contexts/CartContext";
 import Cart from "./components/Cart/CartPage";
 import Order from "./components/Order/OrderPage";
 import { UserDetailProvider } from "./contexts/UserDetailContext";
+import Profile from "./components/Profile/ProfilePage";
 // import ChangePassword from "./components/ChangePassword";
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
             <Route path="/dashboard/books" element={<Books />} />
             <Route path="/dashboard/cart" element={<Cart />} />
             <Route path="/dashboard/orders" element={<Order />} />
+            <Route path="/dashboard/profile" element={<Profile />} />
             <Route
               path="/dashboard/bookDetails/:bookId"
               element={<BookDetailsPage />}
