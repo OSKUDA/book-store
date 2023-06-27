@@ -1,15 +1,29 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { UserDetailContext } from "../../contexts/UserDetails";
 import validateEmailPassword from "../../utils/validateEmailPassword";
 import postAuthenticate from "../../services/auth/postAuthenticate";
+import getUser from "../../services/auth/getUser";
 const SignIn = () => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [result, setResult] = useState("");
   const [serverError, setServerError] = useState(false);
   const [invalidCredentialError, setInvalidCredentialError] = useState(false);
+  const { updateUserDetail } = useContext(UserDetailContext);
+
   // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
+
+  const handleUserDetailUpdate = (token, email) => {
+    getUser({
+      query: [token, email],
+    }).then((response) => {
+      console.log(response.data);
+      updateUserDetail(response.data.minUser);
+    });
+  };
+
   return (
     <div className="form-container vertical-center">
       <form
@@ -39,6 +53,7 @@ const SignIn = () => {
                     "token",
                     JSON.stringify(response.data["token"])
                   );
+                  handleUserDetailUpdate(response.data["token"], obj.email);
                   navigate("/dashboard");
                 }
               })
