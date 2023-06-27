@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private UserRepository userRepository;
@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService{
     public AddOrderResponse addOrder(AddOrderRequest addOrderRequest) {
         Orders order = new Orders();
         Optional<User> userOptional = userRepository.findByEmail(addOrderRequest.getEmail());
-        if(userOptional.isPresent()){
+        if (userOptional.isPresent()) {
             List<Book> bookList = new ArrayList<>();
             addOrderRequest.getBookIdList().forEach(
                     id -> {
@@ -55,7 +55,7 @@ public class OrderServiceImpl implements OrderService{
                     .status(true)
                     .message("success")
                     .build();
-        }else{
+        } else {
             return AddOrderResponse
                     .builder()
                     .status(false)
@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public OrdersResponse fetchAllOrder(int page, int length) {
         List<MinOrder> minOrderList = new ArrayList<>();
-        List<Orders> ordersList = orderRepository.findAll(PageRequest.of(page,length)).getContent();
+        List<Orders> ordersList = orderRepository.findAll(PageRequest.of(page, length)).getContent();
         ordersList.forEach(
                 orders -> {
                     MinOrder minOrder = new MinOrder();
@@ -76,7 +76,7 @@ public class OrderServiceImpl implements OrderService{
 
                     List<MinBook> minBookList = new ArrayList<>();
                     orders.getBooks().forEach(
-                            book ->{
+                            book -> {
                                 minBookList.add(MinBook.fromBook(book));
                             }
                     );
@@ -84,7 +84,7 @@ public class OrderServiceImpl implements OrderService{
                     minOrderList.add(minOrder);
                 }
         );
-        if(minOrderList.isEmpty()){
+        if (minOrderList.isEmpty()) {
             return OrdersResponse
                     .builder()
                     .status(false)
@@ -92,7 +92,7 @@ public class OrderServiceImpl implements OrderService{
                     .page(page)
                     .size(minOrderList.size())
                     .build();
-        }else{
+        } else {
             return OrdersResponse
                     .builder()
                     .status(true)
@@ -107,7 +107,7 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public OrderResponse fetchOrder(long id) {
         Optional<Orders> orderOptional = orderRepository.findById(id);
-        if(orderOptional.isPresent()){
+        if (orderOptional.isPresent()) {
             Orders order = orderOptional.get();
 
             MinOrder minOrder = new MinOrder();
@@ -116,7 +116,7 @@ public class OrderServiceImpl implements OrderService{
 
             List<MinBook> minBookList = new ArrayList<>();
             order.getBooks().forEach(
-                    book ->{
+                    book -> {
                         minBookList.add(MinBook.fromBook(book));
                     }
             );
@@ -128,7 +128,7 @@ public class OrderServiceImpl implements OrderService{
                     .message("success")
                     .minOrder(minOrder)
                     .build();
-        }else{
+        } else {
             return OrderResponse
                     .builder()
                     .status(false)
@@ -137,4 +137,51 @@ public class OrderServiceImpl implements OrderService{
                     .build();
         }
     }
+
+    @Override
+    public OrderByEmailResponse fetchOrderByEmail(String email) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+
+        if (userOptional.isEmpty()) {
+            return OrderByEmailResponse.builder()
+                    .status(false)
+                    .message("Email not found")
+                    .minOrderList(null)
+                    .build();
+        }
+
+        List<Orders> ordersList = orderRepository.findByUserEmail(email);
+
+        if (ordersList.isEmpty()) {
+            return OrderByEmailResponse.builder()
+                    .status(false)
+                    .message("Empty orders")
+                    .minOrderList(null)
+                    .build();
+        }
+
+        List<MinOrder> minOrderList = new ArrayList<>();
+
+        ordersList.forEach(order -> {
+            MinOrder minOrder = new MinOrder();
+            minOrder.setId(order.getId());
+            minOrder.setMinUser(MinUser.fromUser(userOptional.get()));
+
+            List<MinBook> minBookList = new ArrayList<>();
+
+            order.getBooks().forEach(book -> {
+                minBookList.add(MinBook.fromBook(book));
+            });
+
+            minOrder.setMinBookList(minBookList);
+            minOrderList.add(minOrder);
+        });
+
+        return OrderByEmailResponse.builder()
+                .status(true)
+                .message("success")
+                .minOrderList(minOrderList)
+                .build();
+    }
+
 }
