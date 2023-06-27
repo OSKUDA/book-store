@@ -1,20 +1,22 @@
 import { Link } from "react-router-dom";
 import NavBar from "../NavBar";
 import OrderGrid from "./OrderGrid";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { UserDetailContext } from "../../contexts/UserDetailContext";
 import getOrders from "../../services/orders/getOrders";
 const OrderPage = () => {
   const [minOrderList, setMinOrderList] = useState([]);
+  const { userDetail } = useContext(UserDetailContext);
   const token = JSON.parse(localStorage.getItem("token"));
   useEffect(() => {
     if (token !== null) {
       getOrders({
-        query: [token],
+        query: [token, userDetail.email],
       }).then((response) => {
         setMinOrderList(response.data.minOrderList);
       });
     }
-  }, [token]);
+  }, [token, userDetail]);
   if (token === null) {
     return (
       <div className="form-container vertical-center">

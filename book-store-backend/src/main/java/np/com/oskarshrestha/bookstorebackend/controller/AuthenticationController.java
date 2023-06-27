@@ -1,9 +1,6 @@
 package np.com.oskarshrestha.bookstorebackend.controller;
 
-import np.com.oskarshrestha.bookstorebackend.model.UserAuthenticationRequest;
-import np.com.oskarshrestha.bookstorebackend.model.UserAuthenticationResponse;
-import np.com.oskarshrestha.bookstorebackend.model.UserRegisterRequest;
-import np.com.oskarshrestha.bookstorebackend.model.UserRegisterResponse;
+import np.com.oskarshrestha.bookstorebackend.model.*;
 import np.com.oskarshrestha.bookstorebackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +35,18 @@ public class AuthenticationController {
             return ResponseEntity.status(401).body(response);
         }else{
             return ResponseEntity.ok(response);
+        }
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<MinUserResponse> getMinUserDetails(
+            @RequestParam("email") String email
+    ){
+        MinUserResponse response = userService.fetchMinUser(email);
+        if(response.isStatus()){
+            return ResponseEntity.ok(response);
+        }else{
+            return ResponseEntity.badRequest().body(response);
         }
     }
 }
