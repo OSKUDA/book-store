@@ -1,12 +1,18 @@
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import RootPage from "./components/RootPage";
+import Register from "./components/Auth/Register";
+import { UserDetailProvider } from "./contexts/userDetailContext";
+import SignIn from "./components/Auth/SignIn";
 const App = () => {
   return (
     <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<RootPage />} />
-          </Routes>
+      <UserDetailProvider>
+        <Routes>
+          <Route path="/" element={<SignIn />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<SignIn />} />
+        </Routes>
+      </UserDetailProvider>
     </BrowserRouter>
   );
 };
