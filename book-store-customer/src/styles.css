@@ -301,6 +301,27 @@ body {
   align-items: center;
 }
 
+.empty-cart-message {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #333; /* Change the color to your preferred color */
+  margin-top: 20px;
+  animation: zoom 1s ease-in-out infinite alternate;
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .confirm-order-button {
   padding: 10px 20px;
   background-color: #ff5e3a;
@@ -444,4 +465,89 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transform: translateY(-2px);
   transition: all 0.3s ease;
+}
+
+/* CSS styles for home page */
+.homepage {
+  text-align: center;
+  padding: 40px;
+}
+
+.homepage h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.homepage p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.hero-description {
+  background-color: #f2f2f2;
+  color: #333333;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.browse-link,
+.order-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.browse-link:hover,
+.order-link:hover {
+  background-color: #2980b9;
+}
+
+.features-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.feature {
+  width: 300px;
+  padding: 20px;
+  margin: 20px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feature i {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.feature h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.feature p {
+  font-size: 16px;
+}
+
+.call-to-action {
+  margin-top: 60px;
+}
+
+.call-to-action h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }

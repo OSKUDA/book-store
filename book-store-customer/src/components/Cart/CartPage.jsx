@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import getBook from "../../services/books/getBook";
 import BookGrid from "../Book/BookGrid";
 import postAddOrder from "../../services/orders/postAddOrder";
+
 const CartPage = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   const { cartItems, clearCart } = useContext(CartContext);
@@ -14,6 +15,7 @@ const CartPage = () => {
   const [deliveryAddress, setDeliveryAddress] = useState("");
   const [orderPostSuccess, setOrderPostSuccess] = useState(false);
   const { userDetail } = useContext(UserDetailContext);
+
   useEffect(() => {
     const fetchBooks = async () => {
       const bookData = [];
@@ -45,6 +47,7 @@ const CartPage = () => {
   const handleDeliveryAddressChange = (event) => {
     setDeliveryAddress(event.target.value);
   };
+
   if (token === null) {
     return (
       <div className="form-container vertical-center">
@@ -80,17 +83,23 @@ const CartPage = () => {
                   onChange={handleDeliveryAddressChange}
                 />
               </div>
-              <button
-                className="confirm-order-button"
-                onClick={() => {
-                  if (deliveryAddress.trim() !== "") {
-                    handleAddOrder(cartItems);
-                    clearCart();
-                  }
-                }}
-              >
-                Confirm Order ✔️
-              </button>
+              {cartItems.length === 0 ? (
+                <p className="empty-cart-message">
+                  Your cart is empty. Add items to your cart.
+                </p>
+              ) : (
+                <button
+                  className="confirm-order-button"
+                  onClick={() => {
+                    if (deliveryAddress.trim() !== "") {
+                      handleAddOrder(cartItems);
+                      clearCart();
+                    }
+                  }}
+                >
+                  Confirm Order ✔️
+                </button>
+              )}
               <br />
               <br />
               {orderPostSuccess ? (
@@ -110,4 +119,5 @@ const CartPage = () => {
     );
   }
 };
+
 export default CartPage;
