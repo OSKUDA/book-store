@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -75,12 +76,16 @@ public class OrderServiceImpl implements OrderService {
                     minOrder.setMinUser(MinUser.fromUser(orders.getUser()));
 
                     List<MinBook> minBookList = new ArrayList<>();
+                    AtomicInteger amount = new AtomicInteger();
                     orders.getBooks().forEach(
                             book -> {
+                                amount.addAndGet(book.getPrice());
                                 minBookList.add(MinBook.fromBook(book));
                             }
                     );
+                    minOrder.setAmount(amount.get());
                     minOrder.setMinBookList(minBookList);
+                    minOrder.setDeliveryAddress(orders.getDeliveryAddress());
                     minOrderList.add(minOrder);
                 }
         );
@@ -115,13 +120,16 @@ public class OrderServiceImpl implements OrderService {
             minOrder.setMinUser(MinUser.fromUser(order.getUser()));
 
             List<MinBook> minBookList = new ArrayList<>();
+            AtomicInteger amount = new AtomicInteger();
             order.getBooks().forEach(
                     book -> {
+                        amount.addAndGet(book.getPrice());
                         minBookList.add(MinBook.fromBook(book));
                     }
             );
+            minOrder.setAmount(amount.get());
             minOrder.setMinBookList(minBookList);
-
+            minOrder.setDeliveryAddress(order.getDeliveryAddress());
             return OrderResponse
                     .builder()
                     .status(true)
@@ -168,12 +176,14 @@ public class OrderServiceImpl implements OrderService {
             minOrder.setMinUser(MinUser.fromUser(userOptional.get()));
 
             List<MinBook> minBookList = new ArrayList<>();
-
+            AtomicInteger amount = new AtomicInteger();
             order.getBooks().forEach(book -> {
+                amount.addAndGet(book.getPrice());
                 minBookList.add(MinBook.fromBook(book));
             });
-
+            minOrder.setAmount(amount.get());
             minOrder.setMinBookList(minBookList);
+            minOrder.setDeliveryAddress(order.getDeliveryAddress());
             minOrderList.add(minOrder);
         });
 

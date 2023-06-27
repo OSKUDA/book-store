@@ -17,4 +17,6 @@ public class MinOrder {
     private MinUser minUser;
 
     private List<MinBook> minBookList;
+    private String deliveryAddress;
+    private int amount;
 }
