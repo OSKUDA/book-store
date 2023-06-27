@@ -8,6 +8,7 @@ import ErrorBoundary from "./components/ErrorBoundry";
 import Books from "./components/Book/BooksPage";
 import BookDetails from "./components/Book/BookDetailsPage";
 import Orders from "./components/Order/OrderPage";
+import Profile from "./components/Profile/ProfilePage";
 const App = () => {
   return (
     <ErrorBoundary>
@@ -24,6 +25,7 @@ const App = () => {
               element={<BookDetails />}
             />
             <Route path="/dashboard/orders" element={<Orders />} />
+            <Route path="/dashboard/profile" element={<Profile />} />
           </Routes>
         </UserDetailProvider>
       </BrowserRouter>
