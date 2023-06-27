@@ -11,8 +11,10 @@ const Order = (minOrder) => {
           <Book key={minBook.id} minBook={minBook} />
         ))}
       </div>
-      <p className="order-total">Total: 450</p>
-      <p className="order-delivery-address">Delivery address: Long address</p>
+      <p className="order-total">Total: ₹{minOrder.amount}</p>
+      <p className="order-delivery-address">
+        Delivery address: {minOrder.deliveryAddress}
+      </p>
     </div>
   );
 };
