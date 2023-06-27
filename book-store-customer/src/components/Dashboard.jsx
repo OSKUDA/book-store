@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
+import Homepage from "./HomePage";
 
 const Dashboard = () => {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -22,6 +23,7 @@ const Dashboard = () => {
     return (
       <div>
         <NavBar />
+        <Homepage />
       </div>
     );
   }
