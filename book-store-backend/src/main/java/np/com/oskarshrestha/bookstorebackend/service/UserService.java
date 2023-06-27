@@ -8,4 +8,6 @@ public interface UserService {
     UserAuthenticationResponse authenticate(UserAuthenticationRequest userAuthenticationRequest);
 
     MinUserResponse fetchMinUser(String email);
+
+    MinUsersResponse fetchAllMinUser();
 }

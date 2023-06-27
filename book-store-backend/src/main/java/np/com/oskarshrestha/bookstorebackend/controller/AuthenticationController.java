@@ -38,15 +38,5 @@ public class AuthenticationController {
         }
     }
 
-    @GetMapping("/user")
-    public ResponseEntity<MinUserResponse> getMinUserDetails(
-            @RequestParam("email") String email
-    ){
-        MinUserResponse response = userService.fetchMinUser(email);
-        if(response.isStatus()){
-            return ResponseEntity.ok(response);
-        }else{
-            return ResponseEntity.badRequest().body(response);
-        }
-    }
+
 }
