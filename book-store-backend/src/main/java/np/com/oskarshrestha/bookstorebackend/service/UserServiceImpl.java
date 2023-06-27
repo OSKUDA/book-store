@@ -1,10 +1,7 @@
 package np.com.oskarshrestha.bookstorebackend.service;
 
 import np.com.oskarshrestha.bookstorebackend.entity.User;
-import np.com.oskarshrestha.bookstorebackend.model.UserAuthenticationRequest;
-import np.com.oskarshrestha.bookstorebackend.model.UserAuthenticationResponse;
-import np.com.oskarshrestha.bookstorebackend.model.UserRegisterRequest;
-import np.com.oskarshrestha.bookstorebackend.model.UserRegisterResponse;
+import np.com.oskarshrestha.bookstorebackend.model.*;
 import np.com.oskarshrestha.bookstorebackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +9,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -84,4 +83,26 @@ public class UserServiceImpl implements UserService{
         }
     }
 
+    @Override
+    public MinUserResponse fetchMinUser(String email){
+        Optional<User> userOptional = userRepository.findByEmail(email);
+
+        if(userOptional.isPresent()){
+            return MinUserResponse
+                    .builder()
+                    .status(true)
+                    .message("success")
+                    .minUser(MinUser.fromUser(userOptional.get()))
+                    .build();
+        }else{
+            return MinUserResponse
+                    .builder()
+                    .status(false)
+                    .message("email not found")
+                    .minUser(null)
+                    .build();
+        }
+
+
+    }
 }
