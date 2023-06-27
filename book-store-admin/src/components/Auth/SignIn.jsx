@@ -64,7 +64,7 @@ const SignIn = () => {
           }
         }}
       >
-        <h1 className="app-title center">BookStore</h1>
+        <h1 className="app-title center">BookStore Admin</h1>
         <br />
         <br />
         <h3 className="center">Sign-In</h3>

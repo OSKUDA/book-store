@@ -395,3 +395,49 @@ body {
   gap: 10px;
   flex-wrap: wrap;
 }
+
+/* CSS styles for profile page */
+.profile-card {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  color: #333333;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid #dddddd;
+  text-align: center;
+}
+
+.profile-card p {
+  margin: 10px 0;
+}
+
+.profile-id {
+  font-weight: bold;
+}
+
+.profile-email {
+  color: #555555; /* Gray text color */
+}
+
+.profile-first-name,
+.profile-last-name,
+.profile-role {
+  font-weight: bold;
+}
+
+/* Additional styling for an attractive appearance */
+.profile-card {
+  font-family: Arial, sans-serif;
+}
+
+.profile-card p {
+  font-size: 16px;
+}
+
+.profile-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
