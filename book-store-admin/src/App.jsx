@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./components/Auth/Register";
 import { UserDetailProvider } from "./contexts/userDetailContext";
 import SignIn from "./components/Auth/SignIn";
+import Dashboard from "./components/Dashboard";
 const App = () => {
   return (
     <BrowserRouter>
@@ -11,6 +12,7 @@ const App = () => {
           <Route path="/" element={<SignIn />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<SignIn />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </UserDetailProvider>
     </BrowserRouter>
