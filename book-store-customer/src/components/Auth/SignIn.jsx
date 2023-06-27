@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserDetailContext } from "../../contexts/UserDetails";
+import { UserDetailContext } from "../../contexts/UserDetailContext";
 import validateEmailPassword from "../../utils/validateEmailPassword";
 import postAuthenticate from "../../services/auth/postAuthenticate";
 import getUser from "../../services/auth/getUser";

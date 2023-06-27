@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import NavBar from "../NavBar";
 import OrderGrid from "./OrderGrid";
 import { useEffect, useState, useContext } from "react";
-import { UserDetailContext } from "../../contexts/UserDetails";
+import { UserDetailContext } from "../../contexts/UserDetailContext";
 import getOrders from "../../services/orders/getOrders";
 const OrderPage = () => {
   const [minOrderList, setMinOrderList] = useState([]);

@@ -10,7 +10,7 @@ import BookDetailsPage from "./components/Book/BookDetailsPage";
 import { CartProvider } from "./contexts/CartContext";
 import Cart from "./components/Cart/CartPage";
 import Order from "./components/Order/OrderPage";
-import { UserDetailProvider } from "./contexts/UserDetails";
+import { UserDetailProvider } from "./contexts/UserDetailContext";
 // import ChangePassword from "./components/ChangePassword";
 
 const App = () => {
