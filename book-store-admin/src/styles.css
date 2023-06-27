@@ -206,3 +206,155 @@ body {
   font-weight: bold;
   margin-bottom: 20px;
 }
+
+/* CSS styles for book card */
+.book-card {
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  border: 2px solid #9acd32;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 32px;
+  margin-bottom: 16px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  text-align: left;
+  width: 120px;
+}
+
+.book-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.book-author {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.book-publication,
+.book-price,
+.book-amount {
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.book-price {
+  color: #ff5e5e;
+}
+
+.book-amount {
+  color: #47a865;
+}
+
+/* CSS styles for book grid */
+.book-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(0, 1fr));
+  grid-gap: 20px;
+  max-width: 1000px; /* Optional: Set a maximum width for the grid */
+}
+@media (min-width: 576px) {
+  .book-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .book-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 992px) {
+  .book-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .book-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* CSS styles for previous and next button on book page */
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 98%;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+
+.previous-button,
+.next-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  color: black;
+  border-color: #9acd32;
+}
+
+.next-button {
+  margin-left: 10px;
+}
+
+.page-number {
+  font-size: 28px;
+}
+
+/* CSS styles for book details */
+.book-details-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.book-details {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.book-details-field {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.book-details-label {
+  font-weight: bold;
+  width: 120px;
+}
+
+.book-details-span {
+  margin-left: 10px;
+  text-align: justify;
+}
+
+.book-details-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-details-title-center {
+  margin: 0;
+  text-align: center;
+  text-decoration: underline;
+}
