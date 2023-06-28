@@ -528,3 +528,35 @@ body {
 .add-book-form-container button:focus {
   border: 1px solid cornflowerblue;
 }
+
+.add-book-success-message {
+  font-weight: bold;
+  font-size: 24px;
+  color: green;
+  animation: celebrateSuccess 2s infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-book-failed-message {
+  font-weight: bold;
+  font-size: 24px;
+  color: green;
+  animation: celebrateSuccess 2s infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes celebrateSuccess {
+  0% {
+    transform: scale(0.65);
+  }
+  50% {
+    transform: scale(0.75);
+  }
+  100% {
+    transform: scale(0.65);
+  }
+}

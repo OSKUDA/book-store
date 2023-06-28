@@ -12,6 +12,8 @@ const AddBookPage = () => {
   const [quantityError, setQuantityError] = useState(false);
   const [priceError, setPriceError] = useState(false);
   const [summaryError, setSummaryError] = useState(false);
+  const [serverError, setServerError] = useState(false);
+  const [serverErrorMessage, setServerErrorMessage] = useState("");
   const [success, setSuccess] = useState(false);
   if (token === null) {
     return (
@@ -33,6 +35,18 @@ const AddBookPage = () => {
       <div>
         <NavBar />
         <h1 className="title-center">Add Book</h1>
+        {success ? (
+          <p className="add-book-success-message">
+            Order placed successfully 🎉
+          </p>
+        ) : null}
+        {serverError ? (
+          <p className="add-book-failed-message">
+            Oops something went wrong ¯\_(ツ)_/¯
+            <br />
+            {serverErrorMessage}
+          </p>
+        ) : null}
         <div className="add-book-form-container">
           <form
             onSubmit={(e) => {
@@ -62,10 +76,19 @@ const AddBookPage = () => {
                 validObj.price &&
                 validObj.summary
               ) {
-                console.log("post called");
                 postBook({
                   query: [token, obj],
-                });
+                })
+                  .then(() => {
+                    setSuccess(true);
+                    setServerError(false);
+                    setServerErrorMessage("");
+                  })
+                  .catch((e) => {
+                    setSuccess(false);
+                    setServerError(true);
+                    setServerErrorMessage(e.message);
+                  });
               }
             }}
           >
