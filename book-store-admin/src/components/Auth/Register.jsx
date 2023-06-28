@@ -47,7 +47,7 @@ const Register = () => {
                 setIsLoading(false);
                 setServerError(false);
                 setResult(response.data);
-                console.log(result);
+                result;
               })
               .catch((e) => {
                 console.error(e.message);
