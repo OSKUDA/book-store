@@ -11,6 +11,7 @@ import Orders from "./components/Order/OrderPage";
 import Profile from "./components/Profile/ProfilePage";
 import User from "./components/Users/UserPage";
 import AddBook from "./components/AddBook/AddBookPage";
+import EditBook from "./components/EditBook/EditBookPage";
 const App = () => {
   return (
     <ErrorBoundary>
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/dashboard/profile" element={<Profile />} />
             <Route path="/dashboard/users" element={<User />} />
             <Route path="/dashboard/add-book" element={<AddBook />} />
+            <Route path="/dashboard/edit-book/:bookId" element={<EditBook />} />
           </Routes>
         </UserDetailProvider>
       </BrowserRouter>

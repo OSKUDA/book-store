@@ -346,6 +346,11 @@ body {
   margin-left: 10px;
   text-align: justify;
 }
+
+.book-details-summary-input {
+  height: 300px;
+  width: 500px;
+}
 .delete-book-button-container {
   display: flex;
   justify-content: center;
