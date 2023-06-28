@@ -47,6 +47,11 @@ const BooksPage = () => {
         {status ? (
           <div>
             <h1 className="title-center">Books</h1>
+            <div className="add-book-button-container">
+              <button className="add-book-button" onClick={() => {}}>
+                Add Book 📖
+              </button>
+            </div>
             <div className="button-container">
               <button className="previous-button" onClick={handlePreviousPage}>
                 Previous
