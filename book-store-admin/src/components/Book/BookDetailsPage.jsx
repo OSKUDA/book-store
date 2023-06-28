@@ -27,6 +27,9 @@ const BookDetailsPage = () => {
     });
     navigate("/dashboard/books");
   };
+  const handleEditBook = () => {
+    navigate(`/dashboard/edit-book/${bookId}`);
+  };
 
   if (token === null) {
     return (
@@ -53,6 +56,14 @@ const BookDetailsPage = () => {
             <div className="book-details-button-container">
               <h1 className="book-details-title-center">Book Details</h1>
               <button
+                className="edit-book-button"
+                onClick={() => {
+                  handleEditBook();
+                }}
+              >
+                Edit Book ✍
+              </button>
+              <button
                 className="delete-book-button"
                 onClick={() => {
                   handleDeleteBook();
@@ -64,7 +75,7 @@ const BookDetailsPage = () => {
             <BookDetailsCard book={book} />
           </div>
         ) : (
-          <p>Loading book...</p>
+          <p>Unable to load book...</p>
         )}
       </div>
     );

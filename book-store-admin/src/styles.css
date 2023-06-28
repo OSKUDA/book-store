@@ -352,6 +352,27 @@ body {
   margin-top: 10px;
 }
 
+.edit-book-button {
+  padding: 10px 20px;
+  background-color: #ffcec3;
+  color: #ff5e3a;
+  border: 2px solid #ff5e3a;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.edit-book-button:hover {
+  background-color: #ff5e3a;
+  color: #fff;
+}
+
+.edit-book-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #ff5e3a;
+}
+
 .delete-book-button {
   padding: 10px 20px;
   background-color: #ff5e3a;
