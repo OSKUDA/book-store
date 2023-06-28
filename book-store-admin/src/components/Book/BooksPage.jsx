@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../NavBar";
 import BookGrid from "./BookGrid";
 import getBooks from "../../services/books/getBooks";
@@ -8,6 +8,7 @@ const BooksPage = () => {
   const [minBookList, setMinBookList] = useState([]);
   const [status, setStatus] = useState(false);
   const [page, setPage] = useState(0);
+  const navigate = useNavigate();
   useEffect(() => {
     if (token !== null) {
       getBooks({ query: [token, page, 25] }).then((response) => {
@@ -24,6 +25,10 @@ const BooksPage = () => {
 
   const handleNextPage = () => {
     setPage((prevPage) => prevPage + 1);
+  };
+
+  const handleAddBookButtonClick = () => {
+    navigate("/dashboard/add-book");
   };
   if (token === null) {
     return (
@@ -48,7 +53,10 @@ const BooksPage = () => {
           <div>
             <h1 className="title-center">Books</h1>
             <div className="add-book-button-container">
-              <button className="add-book-button" onClick={() => {}}>
+              <button
+                className="add-book-button"
+                onClick={handleAddBookButtonClick}
+              >
                 Add Book 📖
               </button>
             </div>

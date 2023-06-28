@@ -481,3 +481,50 @@ body {
 .user-grid > * {
   margin-bottom: 20px;
 }
+
+/* CSS styles for add book page */
+.add-book-form-container {
+  width: 400px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.add-book-form-container form {
+  border-radius: 6px;
+  background: #faeff0;
+  box-shadow: 0px 0px 12px #aaa, -0px -0px 12px #fff;
+  width: 360px;
+  margin: 0px 25px 25px 0px;
+  padding: 35px 15px 15px 15px;
+  float: left;
+}
+
+.add-book-form-container label {
+  /* display: block; */
+  width: 60px;
+}
+
+.add-book-form-container button {
+  font-size: 20px;
+}
+
+.add-book-form-container input {
+  margin-bottom: 30px;
+  font-size: 18px;
+  height: 30px;
+  width: 325px;
+}
+
+.add-book-form-container button:hover {
+  background-color: #122622;
+  color: white;
+}
+
+.add-book-form-container button:active {
+  background-color: #5f1d22;
+  color: white;
+}
+
+.add-book-form-container button:focus {
+  border: 1px solid cornflowerblue;
+}
