@@ -40,7 +40,7 @@ const Homepage = () => {
       </div>
       <div className="call-to-action">
         <h2>Ready to embark on a reading journey?</h2>
-        <Link to="/dashboard/cart" className="order-link">
+        <Link to="/dashboard/orders" className="order-link">
           Order Now
         </Link>
       </div>

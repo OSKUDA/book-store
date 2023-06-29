@@ -19,7 +19,6 @@ const SignIn = () => {
     getUser({
       query: [token, email],
     }).then((response) => {
-      console.log(response.data);
       updateUserDetail(response.data.minUser);
     });
   };
