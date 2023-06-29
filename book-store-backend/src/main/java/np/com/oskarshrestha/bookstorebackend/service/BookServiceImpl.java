@@ -5,7 +5,7 @@ import np.com.oskarshrestha.bookstorebackend.model.*;
 import np.com.oskarshrestha.bookstorebackend.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public BooksResponse fetchBooks(int page, int length) {
         List<MinBook> minBooks = bookRepository
-                .findAll(PageRequest.of(page, length))
+                .findAll(PageRequest.of(page, length, Sort.by(Sort.Direction.DESC, "id")))
                 .getContent()
                 .stream()
                 .map(MinBook::fromBook)
@@ -109,6 +109,18 @@ public class BookServiceImpl implements BookService {
             }
             if (putBookRequest.getQuantity() >= 0) {
                 book.setQuantity(putBookRequest.getQuantity());
+            }
+            if(!putBookRequest.getTitle().isEmpty()){
+                book.setTitle(putBookRequest.getTitle());
+            }
+            if(!putBookRequest.getAuthor().isEmpty()){
+                book.setAuthor(putBookRequest.getAuthor());
+            }
+            if(!putBookRequest.getSummary().isEmpty()){
+                book.setSummary(putBookRequest.getSummary());
+            }
+            if(putBookRequest.getPublicationDate() >=0){
+                book.setPublicationDate(putBookRequest.getPublicationDate());
             }
             bookRepository.save(book);
             return PutBookResponse
