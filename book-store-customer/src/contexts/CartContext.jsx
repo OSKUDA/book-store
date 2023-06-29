@@ -22,9 +22,13 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (bookId) => {
-    setCartItems((prevCartItems) =>
-      prevCartItems.filter((id) => id !== bookId)
-    );
+    setCartItems((prevCartItems) => {
+      const updatedCartItems = prevCartItems.filter(
+        (id) => Number(id) !== bookId
+      );
+      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+      return updatedCartItems;
+    });
   };
 
   const clearCart = () => {
