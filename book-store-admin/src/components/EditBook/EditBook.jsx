@@ -81,6 +81,9 @@ const EditBookComponent = ({ book }) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
+          {titleError ? (
+            <span className="error-message">* title is empty</span>
+          ) : null}
         </div>
         <div className="book-details-field">
           <label className="book-details-label" htmlFor="author">
@@ -93,6 +96,9 @@ const EditBookComponent = ({ book }) => {
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
           />
+          {authorError ? (
+            <span className="error-message">* author is empty</span>
+          ) : null}
         </div>
         <div className="book-details-field">
           <label className="book-details-label" htmlFor="publication-date">
@@ -105,6 +111,9 @@ const EditBookComponent = ({ book }) => {
             value={publicationDate}
             onChange={(e) => setPublicationDate(e.target.value)}
           />
+          {publicationDateError ? (
+            <span className="error-message">* publication date is empty</span>
+          ) : null}
         </div>
         <div className="book-details-field">
           <label className="book-details-label" htmlFor="summary">
@@ -116,6 +125,9 @@ const EditBookComponent = ({ book }) => {
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
           />
+          {summaryError ? (
+            <span className="error-message">* summary is empty</span>
+          ) : null}
         </div>
         <div className="book-details-field">
           <label className="book-details-label" htmlFor="quantity">
@@ -128,6 +140,9 @@ const EditBookComponent = ({ book }) => {
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
           />
+          {quantityError ? (
+            <span className="error-message">* quantity is empty</span>
+          ) : null}
         </div>
         <div className="book-details-field">
           <label className="book-details-label" htmlFor="price">
@@ -140,6 +155,9 @@ const EditBookComponent = ({ book }) => {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
           />
+          {priceError ? (
+            <span className="error-message">* price is empty</span>
+          ) : null}
         </div>
         <div className="book-details-button">
           <button type="submit" className="book-details-submit-button">
@@ -147,6 +165,9 @@ const EditBookComponent = ({ book }) => {
           </button>
         </div>
       </form>
+      <p className="server-message">
+        {serverErrorMessage === "" ? null : serverErrorMessage}
+      </p>
     </div>
   );
 };
