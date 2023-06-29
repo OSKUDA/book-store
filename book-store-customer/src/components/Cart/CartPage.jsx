@@ -110,7 +110,7 @@ const CartPage = () => {
                 <br />
               )}
             </div>
-            <BookGrid minBookList={minBookList} />
+            <BookGrid minBookList={minBookList} isCartPage={true} />
           </div>
         ) : (
           <h2>Failed</h2>
