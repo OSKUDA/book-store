@@ -5,6 +5,7 @@ import np.com.oskarshrestha.bookstorebackend.model.*;
 import np.com.oskarshrestha.bookstorebackend.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public BooksResponse fetchBooks(int page, int length) {
         List<MinBook> minBooks = bookRepository
-                .findAll(PageRequest.of(page, length))
+                .findAll(PageRequest.of(page, length, Sort.by(Sort.Direction.DESC, "id")))
                 .getContent()
                 .stream()
                 .map(MinBook::fromBook)
