@@ -27,6 +27,7 @@ const EditBookComponent = ({ book }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setSuccess(false);
     // input validation
     const obj = {
       title: title,
@@ -69,6 +70,11 @@ const EditBookComponent = ({ book }) => {
 
   return (
     <div className="book-details-container">
+      {success ? (
+        <p className="book-edit-success-message">Updated Successfully 🎉</p>
+      ) : (
+        <br />
+      )}
       <form className="book-details" onSubmit={handleSubmit}>
         <div className="book-details-field">
           <label className="book-details-label" htmlFor="title">
@@ -166,7 +172,7 @@ const EditBookComponent = ({ book }) => {
         </div>
       </form>
       <p className="server-message">
-        {serverErrorMessage === "" ? null : serverErrorMessage}
+        {serverError ? null : serverErrorMessage}
       </p>
     </div>
   );
