@@ -36,9 +36,7 @@ const AddBookPage = () => {
         <NavBar />
         <h1 className="title-center">Add Book</h1>
         {success ? (
-          <p className="add-book-success-message">
-            Order placed successfully 🎉
-          </p>
+          <p className="add-book-success-message">Book Added successfully 🎉</p>
         ) : null}
         {serverError ? (
           <p className="add-book-failed-message">
