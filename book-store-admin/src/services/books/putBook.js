@@ -3,7 +3,7 @@ const putBook = ({ query }) => {
   const token = query[0];
   const bookId = query[1];
   const bookData = query[2];
-  const url = `http://localhost:8080/api/v1/book?id=${bookId}`;
+  const url = `http://localhost:8080/api/v1/admin/book?id=${bookId}`;
   const title = bookData.title;
   const author = bookData.author;
   const publicationDate = bookData.publicationDate;
