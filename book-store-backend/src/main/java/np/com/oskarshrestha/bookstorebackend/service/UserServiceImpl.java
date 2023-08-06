@@ -6,17 +6,14 @@ import np.com.oskarshrestha.bookstorebackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -31,8 +28,8 @@ public class UserServiceImpl implements UserService{
     private AuthenticationManager authenticationManager;
 
     @Override
-    public UserRegisterResponse registerUser(UserRegisterRequest userRegisterRequest){
-        if(userRepository.existsByEmail(userRegisterRequest.getEmail())){
+    public UserRegisterResponse registerUser(UserRegisterRequest userRegisterRequest) {
+        if (userRepository.existsByEmail(userRegisterRequest.getEmail())) {
             return UserRegisterResponse
                     .builder()
                     .existingUser(true)
@@ -59,11 +56,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserAuthenticationResponse authenticate(UserAuthenticationRequest userAuthenticationRequest) {
-        try{
+        try {
             User user = userRepository
                     .findByEmail(userAuthenticationRequest.getEmail())
                     .orElseThrow(
-                            ()-> new UsernameNotFoundException("Email not found: "+userAuthenticationRequest.getEmail())
+                            () -> new UsernameNotFoundException("Email not found: " + userAuthenticationRequest.getEmail())
                     );
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -77,7 +74,7 @@ public class UserServiceImpl implements UserService{
                     .token(jwtToken)
                     .errorMessage(null)
                     .build();
-        }catch (Exception e){
+        } catch (Exception e) {
             return UserAuthenticationResponse
                     .builder()
                     .token(null)
@@ -87,17 +84,17 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public MinUserResponse fetchMinUser(String email){
+    public MinUserResponse fetchMinUser(String email) {
         Optional<User> userOptional = userRepository.findByEmail(email);
 
-        if(userOptional.isPresent()){
+        if (userOptional.isPresent()) {
             return MinUserResponse
                     .builder()
                     .status(true)
                     .message("success")
                     .minUser(MinUser.fromUser(userOptional.get()))
                     .build();
-        }else{
+        } else {
             return MinUserResponse
                     .builder()
                     .status(false)
@@ -109,28 +106,4 @@ public class UserServiceImpl implements UserService{
 
     }
 
-    @Override
-    public MinUsersResponse fetchAllMinUser() {
-        List<User> userList = userRepository.findAll();
-        if(userList.isEmpty()){
-            return MinUsersResponse
-                    .builder()
-                    .status(false)
-                    .message("users not found")
-                    .minUserList(null)
-                    .build();
-        }
-        List<MinUser> minUserList = new ArrayList<>();
-        userList.forEach(
-                user -> {
-                    minUserList.add(MinUser.fromUser(user));
-                }
-        );
-        return MinUsersResponse
-                .builder()
-                .status(true)
-                .message("success")
-                .minUserList(minUserList)
-                .build();
-    }
 }

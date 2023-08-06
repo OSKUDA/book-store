@@ -11,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class WebSecurityConfiguration {
     private static final String[] WHITE_LIST_URLS = {
             "/api/v1/hello",
@@ -36,8 +36,8 @@ public class WebSecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers(WHITE_LIST_URLS)
                 .permitAll()
-//                .requestMatchers(HttpMethod.GET, "/api/v1/book","/api/v1/books")
-//                .permitAll()
+                .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/v1/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()

@@ -9,7 +9,4 @@ public interface BookService {
 
     AddBookResponse addBook(AddBookRequest addBookRequest);
 
-    DeleteBookResponse deleteBookById(Long id);
-
-    PutBookResponse updateBookById(long id, PutBookRequest putBookRequest);
 }
