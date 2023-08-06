@@ -17,11 +17,11 @@ public class BookController {
     @GetMapping("/book")
     public ResponseEntity<BookResponse> getBookById(
             @RequestParam("id") long id
-    ){
+    ) {
         BookResponse response = bookService.fetchBookById(id);
-        if(response.getBook() != null){
+        if (response.getBook() != null) {
             return ResponseEntity.ok(response);
-        }else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
@@ -29,50 +29,26 @@ public class BookController {
     @PostMapping("/book")
     public ResponseEntity<AddBookResponse> postBook(
             @RequestBody AddBookRequest addBookRequest
-    ){
+    ) {
         AddBookResponse response = bookService.addBook(addBookRequest);
-        if(response.isStatus()){
+        if (response.isStatus()) {
             return ResponseEntity.ok(response);
-        }else{
+        } else {
             return ResponseEntity.status(409).body(response);
         }
     }
 
-    @DeleteMapping("/book")
-    public ResponseEntity<DeleteBookResponse> deleteBook(
-            @RequestParam("id") long id
-    ){
-        DeleteBookResponse response = bookService.deleteBookById(id);
-        if(response.isStatus()){
-            return ResponseEntity.ok(response);
-        }else{
-            return ResponseEntity.status(404).body(response);
-        }
-    }
 
-    @PutMapping("/book")
-    public ResponseEntity<PutBookResponse> updateBook(
-            @RequestParam("id") long id,
-            @RequestBody PutBookRequest putBookRequest
-    ){
-        System.out.println("here");
-        PutBookResponse response = bookService.updateBookById(id, putBookRequest);
-        if(response.isStatus()){
-            return ResponseEntity.ok(response);
-        }else{
-            return ResponseEntity.status(404).body(response);
-        }
-    }
 
     @GetMapping("/books")
     public ResponseEntity<BooksResponse> getBooks(
             @RequestParam("page") int page,
             @RequestParam("length") int length
-    ){
+    ) {
         BooksResponse response = bookService.fetchBooks(page, length);
-        if(response.getBookList() != null){
+        if (response.getBookList() != null) {
             return ResponseEntity.ok(response);
-        }else {
+        } else {
             return ResponseEntity.notFound().build();
         }
     }

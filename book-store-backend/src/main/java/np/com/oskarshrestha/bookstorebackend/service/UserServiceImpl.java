@@ -10,8 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -108,28 +106,4 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    @Override
-    public MinUsersResponse fetchAllMinUser() {
-        List<User> userList = userRepository.findAll();
-        if (userList.isEmpty()) {
-            return MinUsersResponse
-                    .builder()
-                    .status(false)
-                    .message("users not found")
-                    .minUserList(null)
-                    .build();
-        }
-        List<MinUser> minUserList = new ArrayList<>();
-        userList.forEach(
-                user -> {
-                    minUserList.add(MinUser.fromUser(user));
-                }
-        );
-        return MinUsersResponse
-                .builder()
-                .status(true)
-                .message("success")
-                .minUserList(minUserList)
-                .build();
-    }
 }

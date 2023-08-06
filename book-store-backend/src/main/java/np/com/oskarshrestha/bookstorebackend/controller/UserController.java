@@ -26,12 +26,5 @@ public class UserController {
         }
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<MinUsersResponse> getAllMinUserDetails(){
-        MinUsersResponse response = userService.fetchAllMinUser();
-        if(response.isStatus()){
-            return ResponseEntity.ok(response);
-        }
-        return ResponseEntity.status(400).body(response);
-    }
+
 }

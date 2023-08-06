@@ -9,5 +9,4 @@ public interface UserService {
 
     MinUserResponse fetchMinUser(String email);
 
-    MinUsersResponse fetchAllMinUser();
 }
