@@ -1,9 +1,10 @@
-package np.com.oskarshrestha.bookstorebackend.model;
+package np.com.oskarshrestha.bookstorebackend.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import np.com.oskarshrestha.bookstorebackend.model.MinBook;
 
 import java.util.List;
 

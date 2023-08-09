@@ -5,6 +5,10 @@ import np.com.oskarshrestha.bookstorebackend.entity.User;
 import np.com.oskarshrestha.bookstorebackend.model.*;
 import np.com.oskarshrestha.bookstorebackend.repository.BookRepository;
 import np.com.oskarshrestha.bookstorebackend.repository.UserRepository;
+import np.com.oskarshrestha.bookstorebackend.request.PutBookRequest;
+import np.com.oskarshrestha.bookstorebackend.response.DeleteBookResponse;
+import np.com.oskarshrestha.bookstorebackend.response.MinUsersResponse;
+import np.com.oskarshrestha.bookstorebackend.response.PutBookResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

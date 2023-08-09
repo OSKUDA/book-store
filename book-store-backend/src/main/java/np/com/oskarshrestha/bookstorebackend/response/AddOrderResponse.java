@@ -1,4 +1,4 @@
-package np.com.oskarshrestha.bookstorebackend.model;
+package np.com.oskarshrestha.bookstorebackend.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,8 +11,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddOrderRequest {
-    private String email;
-    private List<Long> bookIdList;
-    private String deliveryAddress;
+public class AddOrderResponse {
+   private boolean status;
+   private String message;
 }

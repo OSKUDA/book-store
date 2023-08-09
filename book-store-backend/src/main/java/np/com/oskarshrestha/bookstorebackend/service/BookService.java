@@ -1,6 +1,9 @@
 package np.com.oskarshrestha.bookstorebackend.service;
 
-import np.com.oskarshrestha.bookstorebackend.model.*;
+import np.com.oskarshrestha.bookstorebackend.request.AddBookRequest;
+import np.com.oskarshrestha.bookstorebackend.response.AddBookResponse;
+import np.com.oskarshrestha.bookstorebackend.response.BookResponse;
+import np.com.oskarshrestha.bookstorebackend.response.BooksResponse;
 
 public interface BookService {
     BookResponse fetchBookById(Long id);

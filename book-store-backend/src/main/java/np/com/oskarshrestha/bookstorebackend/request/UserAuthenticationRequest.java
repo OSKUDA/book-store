@@ -1,15 +1,15 @@
-package np.com.oskarshrestha.bookstorebackend.model;
+package np.com.oskarshrestha.bookstorebackend.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import np.com.oskarshrestha.bookstorebackend.entity.Book;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookResponse {
-    private Book book;
+public class UserAuthenticationRequest {
+    private String email;
+    private String password;
 }

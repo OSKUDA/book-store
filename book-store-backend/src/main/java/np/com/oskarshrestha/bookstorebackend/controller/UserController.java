@@ -1,11 +1,9 @@
 package np.com.oskarshrestha.bookstorebackend.controller;
 
-import np.com.oskarshrestha.bookstorebackend.model.MinUserResponse;
-import np.com.oskarshrestha.bookstorebackend.model.MinUsersResponse;
+import np.com.oskarshrestha.bookstorebackend.response.MinUserResponse;
 import np.com.oskarshrestha.bookstorebackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

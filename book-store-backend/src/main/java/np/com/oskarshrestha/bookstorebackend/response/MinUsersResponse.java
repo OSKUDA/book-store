@@ -1,15 +1,19 @@
-package np.com.oskarshrestha.bookstorebackend.model;
+package np.com.oskarshrestha.bookstorebackend.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import np.com.oskarshrestha.bookstorebackend.model.MinUser;
+
+import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PutBookResponse {
+public class MinUsersResponse {
     private boolean status;
     private String message;
+    private List<MinUser> minUserList;
 }

@@ -1,6 +1,9 @@
 package np.com.oskarshrestha.bookstorebackend.controller;
 
-import np.com.oskarshrestha.bookstorebackend.model.*;
+import np.com.oskarshrestha.bookstorebackend.request.AddBookRequest;
+import np.com.oskarshrestha.bookstorebackend.response.AddBookResponse;
+import np.com.oskarshrestha.bookstorebackend.response.BookResponse;
+import np.com.oskarshrestha.bookstorebackend.response.BooksResponse;
 import np.com.oskarshrestha.bookstorebackend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

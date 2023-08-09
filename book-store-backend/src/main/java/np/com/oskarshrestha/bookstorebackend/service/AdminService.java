@@ -1,9 +1,9 @@
 package np.com.oskarshrestha.bookstorebackend.service;
 
-import np.com.oskarshrestha.bookstorebackend.model.DeleteBookResponse;
-import np.com.oskarshrestha.bookstorebackend.model.MinUsersResponse;
-import np.com.oskarshrestha.bookstorebackend.model.PutBookRequest;
-import np.com.oskarshrestha.bookstorebackend.model.PutBookResponse;
+import np.com.oskarshrestha.bookstorebackend.response.DeleteBookResponse;
+import np.com.oskarshrestha.bookstorebackend.response.MinUsersResponse;
+import np.com.oskarshrestha.bookstorebackend.request.PutBookRequest;
+import np.com.oskarshrestha.bookstorebackend.response.PutBookResponse;
 
 public interface AdminService {
 

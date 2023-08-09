@@ -1,19 +1,20 @@
-package np.com.oskarshrestha.bookstorebackend.model;
+package np.com.oskarshrestha.bookstorebackend.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import np.com.oskarshrestha.bookstorebackend.entity.Book;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PutBookRequest {
+public class AddBookRequest {
     private String title;
     private String author;
-    private int publicationDate = -1;
+    private int publicationDate;
     private String summary;
-    private int price = -1;
-    private int quantity = -1;
+    private int quantity;
+    private int price;
 }
