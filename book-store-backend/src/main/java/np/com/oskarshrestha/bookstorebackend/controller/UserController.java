@@ -2,26 +2,22 @@ package np.com.oskarshrestha.bookstorebackend.controller;
 
 import np.com.oskarshrestha.bookstorebackend.response.MinUserResponse;
 import np.com.oskarshrestha.bookstorebackend.service.UserService;
+import np.com.oskarshrestha.bookstorebackend.util.ResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:5173/")
 @RequestMapping("/api/v1")
 public class UserController {
     @Autowired
     private UserService userService;
     @GetMapping("/user")
-    public ResponseEntity<MinUserResponse> getMinUserDetails(
+    public ResponseEntity<ResponseModel> getMinUserDetails(
             @RequestParam("email") String email
     ){
-        MinUserResponse response = userService.fetchMinUser(email);
-        if(response.isStatus()){
-            return ResponseEntity.ok(response);
-        }else{
-            return ResponseEntity.badRequest().body(response);
-        }
+        ResponseModel response = userService.fetchMinUser(email);
+        return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
 
