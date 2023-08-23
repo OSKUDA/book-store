@@ -6,12 +6,12 @@ import np.com.oskarshrestha.bookstorebackend.response.OrderByEmailResponse;
 import np.com.oskarshrestha.bookstorebackend.response.OrderResponse;
 import np.com.oskarshrestha.bookstorebackend.response.OrdersResponse;
 import np.com.oskarshrestha.bookstorebackend.service.OrderService;
+import np.com.oskarshrestha.bookstorebackend.util.ResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:5173/")
 @RequestMapping("/api/v1")
 public class OrderController {
 
@@ -19,51 +19,35 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("/order")
-    public ResponseEntity<AddOrderResponse> addOrder(
+    public ResponseEntity<ResponseModel> addOrder(
             @RequestBody AddOrderRequest addOrderRequest
-    ){
-        AddOrderResponse response = orderService.addOrder(addOrderRequest);
-        if(response.isStatus()){
-            return ResponseEntity.ok(response);
-        }else{
-            return ResponseEntity.status(400).body(response);
-        }
+    ) {
+        ResponseModel response = orderService.addOrder(addOrderRequest);
+        return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
     @GetMapping("/order/{id}")
-    public ResponseEntity<OrderResponse> fetchOrderById(
+    public ResponseEntity<ResponseModel> fetchOrderById(
             @PathVariable("id") long id
-    ){
-        OrderResponse response = orderService.fetchOrder(id);
-        if(response.isStatus()){
-            return ResponseEntity.ok(response);
-        }else{
-            return ResponseEntity.status(400).body(response);
-        }
+    ) {
+        ResponseModel response = orderService.fetchOrder(id);
+        return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
     @GetMapping("/order")
-    public ResponseEntity<OrderByEmailResponse> fetchOrderByEmail(
+    public ResponseEntity<ResponseModel> fetchOrderByEmail(
             @RequestParam("email") String email
-    ){
-        OrderByEmailResponse response = orderService.fetchOrderByEmail(email);
-        if(response.isStatus()){
-            return ResponseEntity.ok(response);
-        }else{
-            return ResponseEntity.status(400).body(response);
-        }
+    ) {
+        ResponseModel response = orderService.fetchOrderByEmail(email);
+        return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
     @GetMapping("/orders")
-    public ResponseEntity<OrdersResponse> getOrders(
+    public ResponseEntity<ResponseModel> getOrders(
             @RequestParam("page") int page,
             @RequestParam("length") int length
-    ){
-        OrdersResponse response = orderService.fetchAllOrder(page, length);
-        if(response.isStatus()){
-            return ResponseEntity.ok(response);
-        }else{
-            return ResponseEntity.notFound().build();
-        }
+    ) {
+        ResponseModel response = orderService.fetchAllOrder(page, length);
+        return new ResponseEntity<>(response, response.getHttpStatus());
     }
 }
