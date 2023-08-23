@@ -1,4 +1,4 @@
-package np.com.oskarshrestha.bookstorebackend.model;
+package np.com.oskarshrestha.bookstorebackend.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

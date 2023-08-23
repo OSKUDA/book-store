@@ -1,10 +1,15 @@
 package np.com.oskarshrestha.bookstorebackend.controller;
 
-import np.com.oskarshrestha.bookstorebackend.model.*;
+import np.com.oskarshrestha.bookstorebackend.request.UserAuthenticationRequest;
+import np.com.oskarshrestha.bookstorebackend.request.UserRegisterRequest;
 import np.com.oskarshrestha.bookstorebackend.service.UserService;
+import np.com.oskarshrestha.bookstorebackend.util.ResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -14,27 +19,19 @@ public class AuthenticationController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<UserRegisterResponse> registerUser(
+    public ResponseEntity<ResponseModel> registerUser(
             @RequestBody UserRegisterRequest userRegisterRequest
-    ){
-        UserRegisterResponse response = userService.registerUser(userRegisterRequest);
-        if(response.isRegistrationSuccess()){
-            return ResponseEntity.ok(response);
-        }else{
-            return ResponseEntity.status(409).body(response);
-        }
+    ) {
+        ResponseModel response = userService.registerUser(userRegisterRequest);
+        return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<UserAuthenticationResponse> authenticate(
+    public ResponseEntity<ResponseModel> authenticate(
             @RequestBody UserAuthenticationRequest userAuthenticationRequest
-    ){
-        UserAuthenticationResponse response = userService.authenticate(userAuthenticationRequest);
-        if(response.getToken() == null){
-            return ResponseEntity.status(401).body(response);
-        }else{
-            return ResponseEntity.ok(response);
-        }
+    ) {
+        ResponseModel response = userService.authenticate(userAuthenticationRequest);
+        return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
 

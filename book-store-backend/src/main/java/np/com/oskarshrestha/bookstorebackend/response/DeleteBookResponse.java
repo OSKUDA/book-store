@@ -1,4 +1,4 @@
-package np.com.oskarshrestha.bookstorebackend.model;
+package np.com.oskarshrestha.bookstorebackend.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserAuthenticationResponse {
-    private String token;
-    private String errorMessage;
+public class DeleteBookResponse{
+    private boolean status;
+    private String message;
 }

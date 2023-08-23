@@ -1,12 +1,14 @@
 package np.com.oskarshrestha.bookstorebackend.service;
 
-import np.com.oskarshrestha.bookstorebackend.model.*;
+import np.com.oskarshrestha.bookstorebackend.request.UserAuthenticationRequest;
+import np.com.oskarshrestha.bookstorebackend.request.UserRegisterRequest;
+import np.com.oskarshrestha.bookstorebackend.util.ResponseModel;
 
 public interface UserService {
-    UserRegisterResponse registerUser(UserRegisterRequest userRegisterRequest);
+    ResponseModel registerUser(UserRegisterRequest userRegisterRequest);
 
-    UserAuthenticationResponse authenticate(UserAuthenticationRequest userAuthenticationRequest);
+    ResponseModel authenticate(UserAuthenticationRequest userAuthenticationRequest);
 
-    MinUserResponse fetchMinUser(String email);
+    ResponseModel fetchMinUser(String email);
 
 }

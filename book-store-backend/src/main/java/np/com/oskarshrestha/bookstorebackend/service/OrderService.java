@@ -1,13 +1,14 @@
 package np.com.oskarshrestha.bookstorebackend.service;
 
-import np.com.oskarshrestha.bookstorebackend.model.*;
+import np.com.oskarshrestha.bookstorebackend.request.AddOrderRequest;
+import np.com.oskarshrestha.bookstorebackend.util.ResponseModel;
 
 public interface OrderService {
-    AddOrderResponse addOrder(AddOrderRequest addOrderRequest);
+    ResponseModel addOrder(AddOrderRequest addOrderRequest);
 
-    OrdersResponse fetchAllOrder(int page, int length);
+    ResponseModel fetchAllOrder(int page, int length);
 
-    OrderResponse fetchOrder(long id);
+    ResponseModel fetchOrder(long id);
 
-    OrderByEmailResponse fetchOrderByEmail(String email);
+    ResponseModel fetchOrderByEmail(String email);
 }
