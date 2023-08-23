@@ -42,12 +42,5 @@ public class OrderController {
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
-    @GetMapping("/orders")
-    public ResponseEntity<ResponseModel> getOrders(
-            @RequestParam("page") int page,
-            @RequestParam("length") int length
-    ) {
-        ResponseModel response = orderService.fetchAllOrder(page, length);
-        return new ResponseEntity<>(response, response.getHttpStatus());
-    }
+
 }

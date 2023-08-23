@@ -7,6 +7,7 @@ import np.com.oskarshrestha.bookstorebackend.request.PutBookRequest;
 import np.com.oskarshrestha.bookstorebackend.response.PutBookResponse;
 import np.com.oskarshrestha.bookstorebackend.service.AdminService;
 import np.com.oskarshrestha.bookstorebackend.service.BookService;
+import np.com.oskarshrestha.bookstorebackend.service.OrderService;
 import np.com.oskarshrestha.bookstorebackend.util.ResponseModel;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class AdminController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private OrderService orderService;
 
     @DeleteMapping("/book")
     public ResponseEntity<ResponseModel> deleteBook(
@@ -45,6 +49,15 @@ public class AdminController {
             @RequestBody PutBookRequest putBookRequest
     ) {
         ResponseModel response = adminService.updateBookById(id, putBookRequest);
+        return new ResponseEntity<>(response, response.getHttpStatus());
+    }
+
+    @GetMapping("/orders")
+    public ResponseEntity<ResponseModel> getOrders(
+            @RequestParam("page") int page,
+            @RequestParam("length") int length
+    ) {
+        ResponseModel response = orderService.fetchAllOrder(page, length);
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
