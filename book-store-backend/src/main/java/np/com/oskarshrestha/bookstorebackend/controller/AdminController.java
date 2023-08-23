@@ -5,6 +5,8 @@ import np.com.oskarshrestha.bookstorebackend.response.MinUsersResponse;
 import np.com.oskarshrestha.bookstorebackend.request.PutBookRequest;
 import np.com.oskarshrestha.bookstorebackend.response.PutBookResponse;
 import np.com.oskarshrestha.bookstorebackend.service.AdminService;
+import np.com.oskarshrestha.bookstorebackend.util.ResponseModel;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,38 +19,26 @@ public class AdminController {
     private AdminService adminService;
 
     @DeleteMapping("/book")
-    public ResponseEntity<DeleteBookResponse> deleteBook(
+    public ResponseEntity<ResponseModel> deleteBook(
             @RequestParam("id") long id
     ) {
-        DeleteBookResponse response = adminService.deleteBookById(id);
-        if (response.isStatus()) {
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.status(404).body(response);
-        }
+        ResponseModel response = adminService.deleteBookById(id);
+        return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
     @PutMapping("/book")
-    public ResponseEntity<PutBookResponse> updateBook(
+    public ResponseEntity<ResponseModel> updateBook(
             @RequestParam("id") long id,
             @RequestBody PutBookRequest putBookRequest
     ) {
-        System.out.println("here");
-        PutBookResponse response = adminService.updateBookById(id, putBookRequest);
-        if (response.isStatus()) {
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.status(404).body(response);
-        }
+        ResponseModel response = adminService.updateBookById(id, putBookRequest);
+        return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
     @GetMapping("/users")
-    public ResponseEntity<MinUsersResponse> getAllMinUserDetails() {
-        MinUsersResponse response = adminService.fetchAllMinUser();
-        if (response.isStatus()) {
-            return ResponseEntity.ok(response);
-        }
-        return ResponseEntity.status(400).body(response);
+    public ResponseEntity<ResponseModel> getAllMinUserDetails() {
+        ResponseModel response = adminService.fetchAllMinUser();
+        return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
 }

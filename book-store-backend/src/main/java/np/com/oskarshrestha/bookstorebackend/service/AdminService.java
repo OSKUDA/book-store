@@ -1,15 +1,13 @@
 package np.com.oskarshrestha.bookstorebackend.service;
 
-import np.com.oskarshrestha.bookstorebackend.response.DeleteBookResponse;
-import np.com.oskarshrestha.bookstorebackend.response.MinUsersResponse;
 import np.com.oskarshrestha.bookstorebackend.request.PutBookRequest;
-import np.com.oskarshrestha.bookstorebackend.response.PutBookResponse;
+import np.com.oskarshrestha.bookstorebackend.util.ResponseModel;
 
 public interface AdminService {
 
-    DeleteBookResponse deleteBookById(Long id);
+    ResponseModel deleteBookById(Long id);
 
-    PutBookResponse updateBookById(long id, PutBookRequest putBookRequest);
+    ResponseModel updateBookById(long id, PutBookRequest putBookRequest);
 
-    MinUsersResponse fetchAllMinUser();
+    ResponseModel fetchAllMinUser();
 }
