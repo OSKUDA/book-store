@@ -2,7 +2,7 @@ import axios from "axios";
 const postBook = ({ query }) => {
   const token = query[0];
   const bookData = query[1];
-  const url = "http://localhost:8080/api/v1/book";
+  const url = "http://localhost:8080/api/v1/admin/book";
   const title = bookData.title;
   const author = bookData.author;
   const publicationDate = bookData.publicationDate;
