@@ -5,13 +5,15 @@ const postRegisterUser = ({ query }) => {
   const lastName = query[1];
   const email = query[2];
   const password = query[3];
-  return axios.post(url, {
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    password: password,
-    role: "USER",
-  });
+  return axios
+    .post(url, {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      role: "USER",
+    })
+    .then((response) => response.data);
 };
 
 export default postRegisterUser;
