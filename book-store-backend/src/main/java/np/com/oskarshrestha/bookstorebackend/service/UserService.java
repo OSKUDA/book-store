@@ -9,6 +9,6 @@ public interface UserService {
 
     ResponseModel authenticate(UserAuthenticationRequest userAuthenticationRequest);
 
-    ResponseModel fetchMinUser(String email);
+    ResponseModel fetchMinUser();
 
 }

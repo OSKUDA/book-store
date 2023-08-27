@@ -16,12 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -136,32 +137,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseModel fetchMinUser(String email) {
+    public ResponseModel fetchMinUser() {
         ResponseModel rs;
         try {
-            Optional<User> userOptional = userRepository.findByEmail(email);
+            Authentication authenticationToken = SecurityContextHolder.getContext().getAuthentication();
+            User user = (User) authenticationToken.getPrincipal();
 
-            rs = userOptional.map(user -> ResponseStatus.success(
-                    apiResponseStatus.DATA_FOUND_MESSAGE,
-                    MinUserResponse
-                            .builder()
-                            .status(true)
-                            .message("success")
-                            .minUser(MinUser.fromUser(user))
-                            .build(),
-                    HttpStatus.OK,
-                    true
-            )).orElseGet(() -> ResponseStatus.success(
-                    apiResponseStatus.DATA_NOT_FOUND_MESSAGE,
-                    MinUserResponse
-                            .builder()
-                            .status(false)
-                            .message("email not found")
-                            .minUser(null)
-                            .build(),
-                    HttpStatus.OK,
-                    true
-            ));
+            if (user != null) {
+                rs = ResponseStatus.success(
+                        apiResponseStatus.DATA_FOUND_MESSAGE,
+                        MinUserResponse
+                                .builder()
+                                .status(true)
+                                .message("success")
+                                .minUser(MinUser.fromUser(user))
+                                .build(),
+                        HttpStatus.OK,
+                        true);
+            } else {
+                rs = ResponseStatus.success(
+                        apiResponseStatus.DATA_NOT_FOUND_MESSAGE,
+                        MinUserResponse
+                                .builder()
+                                .status(false)
+                                .message("email not found")
+                                .minUser(null)
+                                .build(),
+                        HttpStatus.OK,
+                        true);
+            }
         } catch (Exception e) {
             log.error("Exception: FetchMinUser: " + Arrays.asList(e.getStackTrace()));
             rs = ResponseStatus.error(

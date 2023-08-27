@@ -15,9 +15,9 @@ const SignIn = () => {
   // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
 
-  const handleUserDetailUpdate = (token, email) => {
+  const handleUserDetailUpdate = (token) => {
     getUser({
-      query: [token, email],
+      query: [token],
     }).then((response) => {
       updateUserDetail(response.data.minUser);
     });
@@ -52,7 +52,7 @@ const SignIn = () => {
                     "token",
                     JSON.stringify(response.data["token"])
                   );
-                  handleUserDetailUpdate(response.data["token"], obj.email);
+                  handleUserDetailUpdate(response.data["token"]);
                   navigate("/dashboard");
                 }
               })
