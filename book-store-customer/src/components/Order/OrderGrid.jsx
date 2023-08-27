@@ -1,7 +1,7 @@
 import Order from "./Order";
 
 const OrderGrid = ({ minOrderList }) => {
-  return (
+  return minOrderList == null || minOrderList.length == 0 ? null : (
     <div className="order-container">
       <div className="order-grid">
         {minOrderList.map((minOrder) => (

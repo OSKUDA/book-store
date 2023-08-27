@@ -24,6 +24,7 @@ const postBook = ({ query }) => {
         headers: { Authorization: `Bearer ${token.replace(/^"(.*)"$/, "$1")}` },
       }
     )
+    .then((response) => response.data)
     .catch((e) => {
       throw new Error(e.message);
     });
