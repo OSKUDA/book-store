@@ -1,9 +1,11 @@
 package np.com.oskarshrestha.bookstorebackend.config;
 
 import np.com.oskarshrestha.bookstorebackend.repository.UserRepository;
+import np.com.oskarshrestha.bookstorebackend.util.CustomAuditorAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -43,5 +45,10 @@ public class ApplicationConfiguration {
         daoAuthenticationProvider.setUserDetailsService(userDetailsService());
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
+    }
+
+    @Bean
+    public AuditorAware<String> auditorAware(){
+        return new CustomAuditorAware();
     }
 }

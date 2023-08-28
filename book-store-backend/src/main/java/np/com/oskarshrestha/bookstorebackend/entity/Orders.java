@@ -1,20 +1,18 @@
 package np.com.oskarshrestha.bookstorebackend.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Orders {
+public class Orders extends Auditory{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

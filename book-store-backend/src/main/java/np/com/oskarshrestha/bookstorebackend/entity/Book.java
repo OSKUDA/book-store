@@ -2,20 +2,21 @@ package np.com.oskarshrestha.bookstorebackend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Book {
+public class Book extends Auditory{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +35,9 @@ public class Book {
 
     private int price;
 
-    // Establishing the many-to-many relationship
+    private boolean isDeleted;
+
+    // Establishing the many-to-many relationships
     @JsonIgnore
     @ManyToMany(mappedBy = "books")
     private List<Orders> orders = new ArrayList<>();
