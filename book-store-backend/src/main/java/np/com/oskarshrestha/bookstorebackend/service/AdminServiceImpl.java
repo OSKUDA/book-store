@@ -37,22 +37,25 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public ResponseModel deleteBookById(Long id) {
-        ResponseModel rs;
         try {
             if (bookRepository.existsById(id)) {
-                bookRepository.deleteById(id);
-                rs = ResponseStatus.success(
-                        apiResponseStatus.SUCCESS_MESSAGE,
-                        DeleteBookResponse
-                                .builder()
-                                .status(true)
-                                .message("success")
-                                .build(),
-                        HttpStatus.OK,
-                        true
-                );
+                Optional<Book> book = bookRepository.findById(id);
+                if (book.isPresent()) {
+                    book.get().setDeleted(true);
+                    bookRepository.save(book.get());
+                    return ResponseStatus.success(
+                            apiResponseStatus.SUCCESS_MESSAGE,
+                            DeleteBookResponse
+                                    .builder()
+                                    .status(true)
+                                    .message("success")
+                                    .build(),
+                            HttpStatus.OK,
+                            true
+                    );
+                }
             } else {
-                rs = ResponseStatus.success(
+                return ResponseStatus.success(
                         apiResponseStatus.SUCCESS_MESSAGE,
                         DeleteBookResponse
                                 .builder()
@@ -65,14 +68,19 @@ public class AdminServiceImpl implements AdminService {
             }
         } catch (Exception e) {
             log.error("Exception: deleteBookById: " + Arrays.asList(e.getStackTrace()));
-            rs = ResponseStatus.error(
+            return ResponseStatus.error(
                     apiResponseStatus.FAILURE_MESSAGE,
                     e.getMessage(),
                     HttpStatus.INTERNAL_SERVER_ERROR,
                     false
             );
         }
-        return rs;
+        return ResponseStatus.error(
+                apiResponseStatus.FAILURE_MESSAGE,
+                "response model is null",
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                false
+        );
     }
 
     @Override

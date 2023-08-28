@@ -69,7 +69,7 @@ public class BookServiceImpl implements BookService {
         ResponseModel rs;
         try {
             List<MinBook> minBooks = bookRepository
-                    .findAll(PageRequest.of(page, length, Sort.by(Sort.Direction.DESC, "id")))
+                    .findByIsDeletedFalse(PageRequest.of(page, length, Sort.by(Sort.Direction.DESC, "id")))
                     .getContent()
                     .stream()
                     .map(MinBook::fromBook)

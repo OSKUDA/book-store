@@ -35,6 +35,8 @@ public class Book extends Auditory{
 
     private int price;
 
+    private boolean isDeleted;
+
     // Establishing the many-to-many relationships
     @JsonIgnore
     @ManyToMany(mappedBy = "books")
