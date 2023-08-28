@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Orders {
+public class Orders extends Auditory{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
