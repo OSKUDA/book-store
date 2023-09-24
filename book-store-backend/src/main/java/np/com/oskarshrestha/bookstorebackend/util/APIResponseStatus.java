@@ -13,4 +13,7 @@ public class APIResponseStatus {
 
     public final String DATA_NOT_FOUND_MESSAGE = "No Data Found";
 
+    public final String JWT_TOKEN_FAILURE = "JWT token is invalid";
+    public final String JWT_TOKEN_EXPIRED = "JWT token has expired";
+
 }
