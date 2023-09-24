@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -117,15 +118,23 @@ public class UserServiceImpl implements UserService {
                     true
             );
         } catch (UsernameNotFoundException e) {
-            log.error("Exception: Authenticate: " + Arrays.asList(e.getStackTrace()));
-            rs = ResponseStatus.success(
+            log.error("Exception: Authenticate: " + e.getMessage());
+            rs = ResponseStatus.error(
                     apiResponseStatus.FAILURE_MESSAGE,
-                    UserAuthenticationResponse.builder().token(null).build(),
+                    e.getMessage(),
                     HttpStatus.NOT_FOUND,
                     false
             );
-        } catch (Exception e) {
-            log.error("Exception: Authenticate: " + Arrays.asList(e.getStackTrace()));
+        } catch (AuthenticationException e) {
+            log.error("Exception: Authenticate: " + e.getMessage());
+            rs = ResponseStatus.error(
+                    apiResponseStatus.FAILURE_MESSAGE,
+                    e.getMessage(),
+                    HttpStatus.UNAUTHORIZED,
+                    false
+            );
+        } catch (Exception e){
+            log.error("Exception: Authenticate: " + e.getMessage());
             rs = ResponseStatus.error(
                     apiResponseStatus.FAILURE_MESSAGE,
                     e.getMessage(),
