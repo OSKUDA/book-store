@@ -1,5 +1,6 @@
 package np.com.oskarshrestha.bookstorebackend.service;
 
+import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
 import np.com.oskarshrestha.bookstorebackend.entity.User;
 import np.com.oskarshrestha.bookstorebackend.model.MinUser;
@@ -95,7 +96,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseModel authenticate(UserAuthenticationRequest userAuthenticationRequest) {
-        ResponseModel rs;
+        ResponseModel rs = null;
         try {
             User user = userRepository
                     .findByEmail(userAuthenticationRequest.getEmail())
@@ -133,7 +134,7 @@ public class UserServiceImpl implements UserService {
                     HttpStatus.UNAUTHORIZED,
                     false
             );
-        } catch (Exception e){
+        } catch (Exception e) {
             log.error("Exception: Authenticate: " + e.getMessage());
             rs = ResponseStatus.error(
                     apiResponseStatus.FAILURE_MESSAGE,
