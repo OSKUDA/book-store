@@ -1,6 +1,5 @@
 package np.com.oskarshrestha.bookstorebackend.service;
 
-import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
 import np.com.oskarshrestha.bookstorebackend.entity.User;
 import np.com.oskarshrestha.bookstorebackend.model.MinUser;

@@ -17,4 +17,7 @@ spring:
       database-platform: org.hibernate.dialect.MySQLDialect
 aop:
   logging:
-    pointcuts: execution(* np.com.oskarshrestha.bookstorebackend.controller..*(..)),execution(* np.com.oskarshrestha.bookstorebackend.service..*(..)),execution(* np.com.oskarshrestha.bookstorebackend.repository..*(..))
+    include:
+      pointcuts: execution(* np.com.oskarshrestha.bookstorebackend.controller..*(..)),execution(* np.com.oskarshrestha.bookstorebackend.service..*(..)),execution(* np.com.oskarshrestha.bookstorebackend.repository..*(..))
+    exclude:
+      pointcuts: execution(* np.com.oskarshrestha.bookstorebackend.service.JwtService.*(..))

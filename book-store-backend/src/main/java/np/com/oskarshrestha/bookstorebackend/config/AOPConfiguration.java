@@ -1,5 +1,6 @@
 package np.com.oskarshrestha.bookstorebackend.config;
 
+import np.com.oskarshrestha.aop.logging.AopLoggingHelper;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
@@ -17,14 +18,15 @@ import java.util.List;
 @Configuration
 public class AOPConfiguration {
 
-    @Value("${aop.logging.pointcuts}")
-    List<String> pointcuts;
+    @Value("${aop.logging.include.pointcuts:}")
+    List<String> includePointcuts;
+
+    @Value("${aop.logging.exclude.pointcuts:}")
+    List<String> excludePointcuts;
 
     @Bean
     public Advisor advisorBean() {
-        AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-        pointcut.setExpression(String.join(" || ", pointcuts));
-        return new DefaultPointcutAdvisor(pointcut, new MyMethodInterceptor());
+        return AopLoggingHelper.getAdvisor(includePointcuts, excludePointcuts);
     }
 
 }
