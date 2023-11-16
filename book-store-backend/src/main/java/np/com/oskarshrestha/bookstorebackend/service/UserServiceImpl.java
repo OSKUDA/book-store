@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseModel authenticate(UserAuthenticationRequest userAuthenticationRequest) {
-        ResponseModel rs;
+        ResponseModel rs = null;
         try {
             User user = userRepository
                     .findByEmail(userAuthenticationRequest.getEmail())
@@ -133,7 +133,7 @@ public class UserServiceImpl implements UserService {
                     HttpStatus.UNAUTHORIZED,
                     false
             );
-        } catch (Exception e){
+        } catch (Exception e) {
             log.error("Exception: Authenticate: " + e.getMessage());
             rs = ResponseStatus.error(
                     apiResponseStatus.FAILURE_MESSAGE,
