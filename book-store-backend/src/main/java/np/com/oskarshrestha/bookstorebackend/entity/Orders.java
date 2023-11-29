@@ -29,6 +29,8 @@ public class Orders extends Auditory{
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
+
+    @Builder.Default
     private List<Book> books = new ArrayList<>();
 
     private String deliveryAddress;

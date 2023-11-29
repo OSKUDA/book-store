@@ -38,6 +38,7 @@ public class Book extends Auditory{
     private boolean isDeleted;
 
     // Establishing the many-to-many relationships
+    @Builder.Default
     @JsonIgnore
     @ManyToMany(mappedBy = "books")
     private List<Orders> orders = new ArrayList<>();
