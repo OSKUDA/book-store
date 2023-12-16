@@ -39,7 +39,6 @@ public class MethodInterceptorImpl implements MethodInterceptor {
         long startTime;
 
         String methodName = invocation.getMethod().getDeclaringClass().getPackage().getName() + "." + invocation.getMethod().getDeclaringClass().getSimpleName() + "." + invocation.getMethod().getName();
-        System.out.println("TEST: "+invocation.getMethod().getDeclaringClass().getName());
         try {
             // Before method invocation
             startTime = System.currentTimeMillis();

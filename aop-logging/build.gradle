@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 repositories {
@@ -7,7 +8,7 @@ repositories {
 }
 
 group = 'np.com.oskarshrestha'
-version = '0.0.1'
+version = '0.0.2'
 description = 'aop-logging'
 
 java {
@@ -18,7 +19,27 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-aop:3.1.4'
     implementation 'org.springframework.boot:spring-boot-starter-web:3.1.4'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.15.3'
+    implementation 'com.amazonaws:aws-java-sdk-iam:1.12.597'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
     compileOnly 'org.projectlombok:lombok:1.18.30'
 }
 
+publishing {
+    publications {
+        myJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            authentication {
+                awsIm(AwsImAuthentication)
+            }
+            if (project.version.endsWith('-SNAPSHOT')) {
+                url "s3://repo.np.com.oskarshrestha.bookstore/snapshots/"
+            } else {
+                url "s3://repo.np.com.oskarshrestha.bookstore/release/"
+            }
+        }
+    }
+}
