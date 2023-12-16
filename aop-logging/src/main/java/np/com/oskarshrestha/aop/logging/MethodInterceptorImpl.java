@@ -2,6 +2,7 @@ package np.com.oskarshrestha.aop.logging;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ public class MethodInterceptorImpl implements MethodInterceptor {
     private ObjectMapper getObjectMapper() {
         // Create an ObjectMapper with Java 8 date/time support
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         mapper.registerModule(new JavaTimeModule());
         mapper.registerModule(new Hibernate5Module());
         // log a message to indicate that object mapper is created
@@ -46,7 +48,7 @@ public class MethodInterceptorImpl implements MethodInterceptor {
             if (requestAttributes != null) {
                 HttpServletRequest request = requestAttributes.getRequest();
                 remoteIpAddress = request.getRemoteAddr();
-                xForwardedForIpAddress = request.getHeader("X-Forwarded-For");
+                xForwardedForIpAddress = (request.getHeader("X-Forwarded-For") != null) ? request.getHeader("X-Forwarded-For") : "-";
             }
             log.info("[{},{}] Started executing method: {}", remoteIpAddress, xForwardedForIpAddress, methodName);
             Object[] methodArguments = invocation.getArguments();
