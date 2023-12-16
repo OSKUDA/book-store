@@ -6,6 +6,12 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven {
+        url "s3://repo.np.com.oskarshrestha.bookstore/release"
+        authentication {
+            awsIm(AwsImAuthentication)
+        }
+    }
 }
 
 group = 'np.com.oskarshrestha'
@@ -31,4 +37,5 @@ dependencies {
     runtimeOnly 'com.mysql:mysql-connector-j:8.0.32'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.0'
     testImplementation 'org.springframework.security:spring-security-test:6.0.2'
+    implementation 'np.com.oskarshrestha:aop-logging:0.0.2'
 }
